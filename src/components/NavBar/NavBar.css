@@ -1,0 +1,13 @@
+.link_container {
+	/* background-color: red; */
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	justify-content: center;
+	padding: 15px;
+	border-radius: 30px;
+}
+.link_container:hover {
+	background-color: var(--extra-extra-light-gray);
+	cursor: pointer;
+}

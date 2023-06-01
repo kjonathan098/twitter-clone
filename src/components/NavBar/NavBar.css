@@ -1,9 +1,10 @@
 .navegation_master {
-	background-color: rgb(226, 195, 43);
+	/* background-color: rgb(226, 195, 43); */
 	width: 25%;
 	padding: 10px;
 	display: flex;
 	justify-content: center;
+	border-right: 2px solid var(--extra-extra-light-gray);
 }
 
 .link_container {

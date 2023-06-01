@@ -20,7 +20,7 @@ body {
 	background-color: #ffffff;
 	min-height: 100vh;
 	height: 100%;
-	background-color: red;
+	/* background-color: red; */
 }
 
 form textarea {

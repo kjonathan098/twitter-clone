@@ -1,12 +1,12 @@
 #master_container {
-	background-color: aqua;
+	/* background-color: aqua; */
 	display: flex;
 	min-height: 100vh;
 	height: 100%;
 }
 
 .main_master {
-	background-color: green;
+	/* background-color: green; */
 	flex-grow: 1;
 	display: flex;
 }

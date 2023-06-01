@@ -13,9 +13,9 @@ const Home = () => {
 					<div>
 						<div className="create_tweet-main">
 							<div>Profile Pic</div>
-							<div>
+							<div className="tweet_form-container">
 								<form>
-									<textarea name="" id=""></textarea>
+									<textarea name="" id="tweet_form"></textarea>
 								</form>
 							</div>
 						</div>

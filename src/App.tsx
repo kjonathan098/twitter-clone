@@ -1,9 +1,8 @@
-import { useState } from "react";
+ import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 
-import Feed from "./components/Feed/Feed";
-
+import Home from "./components/Home/Home";
 function App() {
 	const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
@@ -12,7 +11,7 @@ function App() {
 			<div id="master_container">
 				<div className="main_master">
 					<Routes>
-						<Route path="/" element={<Feed isLoggedIn={isLoggedIn} />} />
+						<Route path="/" element={<Home />} />
 					</Routes>
 				</div>
 			</div>

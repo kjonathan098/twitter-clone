@@ -4,13 +4,7 @@
 	min-height: 100vh;
 	height: 100%;
 }
-.navegation_master {
-	background-color: rgb(226, 195, 43);
-	width: 15%;
-	padding: 10px;
-	display: flex;
-	justify-content: center;
-}
+
 .main_master {
 	background-color: green;
 	flex-grow: 1;

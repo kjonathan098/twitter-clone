@@ -1,0 +1,29 @@
+#home_master {
+	background-color: purple;
+	display: flex;
+	flex-grow: 1;
+}
+
+#feed_master {
+	background-color: green;
+	flex-grow: 1;
+	display: flex;
+}
+
+.feed_main {
+	background-color: red;
+	flex-grow: 1;
+}
+
+.page_title {
+	background-color: blue;
+	padding: 10px;
+	font-size: 30px;
+	font-weight: 900;
+}
+.create_tweet-main {
+	background-color: aquamarine;
+	padding: 10px;
+	display: flex;
+	gap: 10px;
+}

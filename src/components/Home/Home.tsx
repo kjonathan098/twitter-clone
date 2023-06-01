@@ -15,7 +15,16 @@ const Home = () => {
 							<div>Profile Pic</div>
 							<div className="tweet_form-container">
 								<form>
-									<textarea name="" id="tweet_form"></textarea>
+									<textarea name="" id="tweet_form" placeholder="What's Happening?!"></textarea>
+									<div className="tweet_form-options-container">
+										<div>Media upload options</div>
+										<div className="tweet_button">
+											<div>145</div>
+											<div>
+												<button>Tweet</button>
+											</div>
+										</div>
+									</div>
 								</form>
 							</div>
 						</div>

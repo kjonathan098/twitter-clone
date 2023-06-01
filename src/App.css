@@ -14,5 +14,5 @@
 .main_master {
 	background-color: green;
 	flex-grow: 1;
-	padding: 10px;
+	display: flex;
 }

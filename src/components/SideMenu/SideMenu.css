@@ -1,0 +1,11 @@
+.side_menu-master {
+	background-color: yellow;
+	width: 20%;
+}
+.feed_master-top {
+	background-color: red;
+	padding: 10px;
+	font-size: 30px;
+	font-weight: 900;
+	border-bottom: 1px solid var(--extra-extra-light-gray);
+}

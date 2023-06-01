@@ -1,14 +1,22 @@
+import { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
-import NavBar from "./components/NavBar/NavBar";
+
+import Feed from "./components/Feed/Feed";
 
 function App() {
+	const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+
 	return (
-		<div id="master_container">
-			<div className="navegation_master">
-				<NavBar />
+		<BrowserRouter>
+			<div id="master_container">
+				<div className="main_master">
+					<Routes>
+						<Route path="/" element={<Feed isLoggedIn={isLoggedIn} />} />
+					</Routes>
+				</div>
 			</div>
-			<div className="main_master">Main</div>
-		</div>
+		</BrowserRouter>
 	);
 }
 

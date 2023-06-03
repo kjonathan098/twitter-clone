@@ -1,10 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Home.css";
 import NavBar from "../NavBar/NavBar";
 import SideMenu from "../SideMenu/SideMenu";
 import CreateTweet from "./CreateTweet";
+import { APIHandler } from "../../fireBaseConfig";
+import { ITweet } from "../../global/interfaces";
+import Auth from "../Auth/Auth";
 
-const Home = () => {
+interface IProps {
+	isLoggedIn: boolean;
+}
+
+const Home = ({ isLoggedIn }: IProps) => {
+	const [tweets, setTweets] = useState<ITweet[]>([]);
+
+	async function getTweets(): Promise<void> {
+		const tweets: ITweet[] = await APIHandler.getAllTweets();
+		setTweets(tweets);
+	}
+	useEffect(() => {
+		getTweets();
+	}, []);
+
+	if (!isLoggedIn) return <Auth />;
 	return (
 		<div id="home_master">
 			<NavBar />

@@ -3,19 +3,22 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 
 import Home from "./components/Home/Home";
+import AuthProvider from "./context/AuthContext";
 function App() {
 	const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
 	return (
-		<BrowserRouter>
-			<div id="master_container">
-				<div className="main_master">
-					<Routes>
-						<Route path="/" element={<Home isLoggedIn={isLoggedIn} />} />
-					</Routes>
+		<AuthProvider>
+			<BrowserRouter>
+				<div id="master_container">
+					<div className="main_master">
+						<Routes>
+							<Route path="/" element={<Home isLoggedIn={isLoggedIn} />} />
+						</Routes>
+					</div>
 				</div>
-			</div>
-		</BrowserRouter>
+			</BrowserRouter>
+		</AuthProvider>
 	);
 }
 

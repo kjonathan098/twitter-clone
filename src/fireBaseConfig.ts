@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-// import { signInWithPopup, GoogleAuthProvider, getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 import { getFirestore, collection, query, getDocs, orderBy } from "@firebase/firestore";
 // import { getStorage } from "firebase/storage";
 import { ITweet } from "./global/interfaces";
@@ -15,6 +15,9 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
+// Get auth
+export const auth = getAuth(app);
 
 // get DB
 const db = getFirestore(app);

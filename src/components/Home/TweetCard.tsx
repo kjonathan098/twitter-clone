@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ITweet, IUserDetails } from "../../global/interfaces";
 import "./TweetCard.css";
 import { APIHandler } from "../../fireBaseConfig";

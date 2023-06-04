@@ -1,5 +1,5 @@
-.navegation_master {
-	/* background-color: rgb(226, 195, 43); */
+nav {
+	/* background-color: rgb(56, 82, 176); */
 	width: 25%;
 	padding: 10px;
 	display: flex;
@@ -7,16 +7,117 @@
 	border-right: 2px solid var(--extra-extra-light-gray);
 }
 
-.link_container {
-	/* background-color: red; */
+.navBar_master {
+	/* background-color: green; */
 	display: flex;
-	gap: 10px;
-	align-items: center;
+	flex-direction: row-reverse;
+	height: 100%;
 	justify-content: center;
-	padding: 15px;
-	border-radius: 30px;
 }
+
+.nav_container {
+	/* background-color: aqua; */
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	padding: 10px;
+}
+
+.nav_container_top {
+	/* background-color: blueviolet; */
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.nav_container_bottom {
+	/* background-color: green; */
+	height: fit-content;
+}
+.nav_top_logo {
+	padding: 10px 10px;
+	width: fit-content;
+	height: fit-content;
+	border-radius: 50%;
+}
+.nav_top_logo:hover {
+	background: var(--extra-light-gray);
+}
+.nav_top_logo img {
+	height: 30px;
+}
+
+.link_container {
+	/* background-color: yellow; */
+	display: flex;
+	gap: 20px;
+	font-size: 20px;
+	align-items: center;
+	padding: 10px 20px;
+	border-radius: 30px;
+	width: fit-content;
+	margin-bottom: 5px;
+}
+
 .link_container:hover {
-	background-color: var(--extra-extra-light-gray);
 	cursor: pointer;
+	background-color: var(--extra-light-gray);
+}
+
+.tweet_btn {
+	/* background-color: green; */
+	display: flex;
+	justify-content: center;
+}
+
+.tweet_btn button {
+	background-color: var(--main-blue);
+	color: white;
+	padding: 20px 70px;
+	border-radius: 50px;
+	font-size: 1rem;
+	font-weight: 900;
+	border: none;
+}
+
+.tweet_btn button:hover {
+	cursor: pointer;
+}
+
+main {
+	/* background-color: green; */
+	width: 75vw;
+}
+
+.menu_link {
+	text-decoration: none;
+	color: inherit;
+}
+
+@media screen and (max-width: 768px) {
+	nav {
+		width: fit-content;
+		background-color: yellow;
+	}
+	.navBar_master {
+		flex-direction: row;
+	}
+	.nav_container {
+		background-color: blueviolet;
+		width: 100%;
+	}
+	.link_title {
+		display: none;
+	}
+	.tweet_btn button {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.link_title {
+		display: none;
+	}
 }

@@ -25,6 +25,7 @@ const AuthProvider: React.FC<IProps> = ({ children }) => {
 			setLoading(true);
 			if (user) {
 				const userDetails: IUserDetails = { name: user.displayName, email: user.email, profilePic: user.photoURL, wallpaperPic: null, uid: user.uid };
+				setIsLoggedIn(true);
 				console.log(userDetails);
 			} else {
 				setCurrentUser(null);

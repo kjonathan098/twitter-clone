@@ -8,13 +8,11 @@ import { ITweet } from "../../global/interfaces";
 import Auth from "../Auth/Auth";
 import { authContext } from "../../context/AuthContext";
 
-interface IProps {
-	isLoggedIn: boolean;
-}
+interface IProps {}
 
-const Home = ({ isLoggedIn }: IProps) => {
+const Home = () => {
 	const [tweets, setTweets] = useState<ITweet[]>([]);
-	const { test } = useContext(authContext);
+	const { test, isLoggedIn } = useContext(authContext);
 
 	console.log(test);
 

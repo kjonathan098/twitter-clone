@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+import { GoogleAuthProvider, getAuth, signInWithPopup, signOut } from "firebase/auth";
 import { getFirestore, collection, query, getDocs, orderBy } from "@firebase/firestore";
 // import { getStorage } from "firebase/storage";
 import { ITweet, IUserDetails } from "./global/interfaces";
@@ -30,6 +30,7 @@ const tweetsCollection = collection(db, "tweets");
 interface IAPIHandler {
 	getAllTweets: () => Promise<ITweet[]>;
 	googleAuth: () => Promise<any>;
+	logout: () => Promise<any>;
 }
 
 export const APIHandler: IAPIHandler = {
@@ -38,6 +39,10 @@ export const APIHandler: IAPIHandler = {
 		const results = await signInWithPopup(auth, provider);
 		const userDetails: IUserDetails = { name: results.user.displayName, email: results.user.email, profilePic: results.user.photoURL, wallpaperPic: null, uid: results.user.uid };
 		return userDetails;
+	},
+
+	logout: async () => {
+		await signOut(auth);
 	},
 
 	getAllTweets: async (): Promise<ITweet[]> => {

@@ -12,7 +12,7 @@ interface IProps {}
 
 const Home = () => {
 	const [tweets, setTweets] = useState<ITweet[]>([]);
-	const { isLoggedIn } = useContext(authContext);
+	const { isLoggedIn, currentUser } = useContext(authContext);
 
 	async function getTweets(): Promise<void> {
 		const tweets: ITweet[] = await APIHandler.getAllTweets();
@@ -22,7 +22,7 @@ const Home = () => {
 		getTweets();
 	}, []);
 
-	if (!isLoggedIn) return <Auth />;
+	if (!isLoggedIn || !currentUser) return <Auth />;
 	return (
 		<div id="home_master">
 			<NavBar />

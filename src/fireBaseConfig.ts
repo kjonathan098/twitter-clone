@@ -39,7 +39,7 @@ export const APIHandler: IAPIHandler = {
 	googleAuth: async (): Promise<any> => {
 		const provider = new GoogleAuthProvider();
 		const results = await signInWithPopup(auth, provider);
-		const userDetails: IUserDetails = { name: results.user.displayName, email: results.user.email, profilePic: results.user.photoURL, wallpaperPic: null, uid: results.user.uid };
+		const userDetails: IUserDetails = { name: results.user.displayName, email: results.user.email, profilePic: results.user.photoURL || "J", wallpaperPic: null, uid: results.user.uid };
 		return userDetails;
 	},
 

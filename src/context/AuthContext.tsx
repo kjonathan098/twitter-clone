@@ -6,6 +6,7 @@ interface AuthContextValue {
 	test: string;
 	loading: boolean;
 	isLoggedIn: boolean;
+	currentUser: IUserDetails | null;
 }
 export const authContext = createContext<AuthContextValue>({} as AuthContextValue);
 
@@ -40,7 +41,8 @@ const AuthProvider: React.FC<IProps> = ({ children }) => {
 		const unsubscribe = auth.onAuthStateChanged((user) => {
 			setLoading(true);
 			if (user) {
-				const userDetails: IUserDetails = { name: user.displayName, email: user.email, profilePic: user.photoURL, wallpaperPic: null, uid: user.uid, joinedDate: user.metadata.creationTime };
+				const profilePic: string = user.photoURL || "J";
+				const userDetails: IUserDetails = { name: user.displayName, email: user.email, profilePic: profilePic, wallpaperPic: null, uid: user.uid, joinedDate: user.metadata.creationTime };
 				setIsLoggedIn(true);
 				manageCurrentUser(userDetails);
 			} else {
@@ -53,7 +55,7 @@ const AuthProvider: React.FC<IProps> = ({ children }) => {
 		};
 	}, []);
 
-	return <authContext.Provider value={{ test, loading, isLoggedIn }}>{children}</authContext.Provider>;
+	return <authContext.Provider value={{ test, loading, isLoggedIn, currentUser }}>{children}</authContext.Provider>;
 };
 
 export default AuthProvider;

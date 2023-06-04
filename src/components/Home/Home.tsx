@@ -7,11 +7,13 @@ import { APIHandler } from "../../fireBaseConfig";
 import { ITweet } from "../../global/interfaces";
 import Auth from "../Auth/Auth";
 import { authContext } from "../../context/AuthContext";
+import TweetCard from "./TweetCard";
 
 interface IProps {}
 
 const Home = () => {
 	const [tweets, setTweets] = useState<ITweet[]>([]);
+	const [loading, setLoading] = useState(false);
 	const { isLoggedIn, currentUser } = useContext(authContext);
 
 	async function getTweets(): Promise<void> {
@@ -19,10 +21,13 @@ const Home = () => {
 		setTweets(tweets);
 	}
 	useEffect(() => {
-		getTweets();
+		setLoading(true);
+		APIHandler.liveTweets(setTweets);
+		setLoading(false);
 	}, []);
 
 	if (!isLoggedIn || !currentUser) return <Auth />;
+
 	return (
 		<div id="home_master">
 			<NavBar />
@@ -31,7 +36,11 @@ const Home = () => {
 					<div className="page_title">Home</div>
 					<div>
 						<CreateTweet />
-						<div>Tweet Feed</div>
+						<div>
+							{tweets?.map((tweet: ITweet) => {
+								return <TweetCard tweet={tweet} loading={loading} currentUser={currentUser} />;
+							})}
+						</div>
 					</div>
 				</div>
 				<SideMenu />

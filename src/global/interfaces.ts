@@ -1,11 +1,11 @@
 export interface ITweet {
-	comments: string[] | null;
+	comments: string[];
 	dateCreated: string;
-	likes: string[] | null;
+	likes: string[];
 	media: string | null;
 	tweet: string;
 	uid: string;
-	docId?: string | null;
+	docId: string;
 }
 
 export interface IUserDetails {

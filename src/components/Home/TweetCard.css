@@ -1,0 +1,122 @@
+.tweet_card_container {
+	/* background-color: red; */
+	display: flex;
+	flex-direction: column;
+	padding: 5px;
+	border-top: 1px solid var(--extra-light-gray);
+	border-bottom: 1px solid var(--extra-light-gray);
+	gap: 10px;
+	align-items: center;
+}
+.tweet_container:hover {
+	background-color: var(--extra-extra-light-gray);
+}
+
+.tweet_card_top {
+	/* background-color: palegoldenrod; */
+	width: 100%;
+	display: flex;
+}
+
+.test {
+	/* background-color: blue; */
+	min-width: 60px;
+	margin-right: 10px;
+}
+.tweet_right {
+	/* background-color: green; */
+	flex-grow: 1;
+	padding: 5px;
+	display: flex;
+	flex-direction: column;
+	/* align-items: center; */
+}
+.tweet_right_info {
+	display: flex;
+	gap: 10px;
+	margin-bottom: 5px;
+	flex-wrap: wrap;
+}
+
+.tweet_img_container {
+	/* background-color: green; */
+	display: flex;
+	justify-content: center;
+}
+
+.tweet_right img {
+	max-width: 502px;
+	max-height: 376px;
+	object-fit: cover;
+	border-radius: 10px;
+	margin-top: 10px;
+}
+.user_name {
+	font-weight: 900;
+}
+.user_name:hover {
+	cursor: pointer;
+}
+.tweet_date {
+	color: var(--dark-gray);
+}
+
+.tweet_card_bottom {
+	/* background-color: aquamarine; */
+	display: flex;
+	justify-content: space-around;
+	max-width: 85%;
+	width: 100%;
+	padding: 2px;
+	font-size: 15px;
+}
+
+.tweet_card_bottom .action {
+	/* background-color: red; */
+	display: flex;
+	gap: 5px;
+}
+
+.tweet_card_bottom .action:hover {
+	cursor: pointer;
+	color: var(--main-blue);
+}
+
+.tweet_card_bottom .reTweet:hover {
+	color: rgb(95, 170, 95);
+}
+.tweet_card_bottom .like:hover {
+	color: rgb(242, 94, 94);
+}
+.tweet_card_bottom .liked {
+	color: rgb(242, 94, 94);
+}
+
+@media screen and (max-width: 768px) {
+	.tweet_img_container {
+		/* display: none; */
+		/* background-color: red; */
+	}
+
+	.tweet_right img {
+		max-width: 300px;
+		max-height: auto;
+		object-fit: cover;
+		border-radius: 10px;
+		margin-top: 10px;
+	}
+}
+@media screen and (max-width: 425px) {
+	.tweet_right img {
+		max-width: 224px;
+	}
+	#profilePic {
+		width: 30px;
+	}
+	.tweet_card_bottom {
+		max-width: 100%;
+	}
+	.tweet_card_bottom {
+		font-size: 10px;
+	}
+}

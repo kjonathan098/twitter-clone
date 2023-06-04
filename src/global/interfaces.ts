@@ -9,9 +9,11 @@ export interface ITweet {
 }
 
 export interface IUserDetails {
+	readonly uid: string;
+	readonly joinedDate?: string;
+	readonly userDocumentId?: string;
 	name: string | null;
 	email: string | null;
 	profilePic: string | null;
 	wallpaperPic: string | null;
-	uid: string | null;
 }

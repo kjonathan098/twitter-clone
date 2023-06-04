@@ -12,9 +12,7 @@ interface IProps {}
 
 const Home = () => {
 	const [tweets, setTweets] = useState<ITweet[]>([]);
-	const { test, isLoggedIn } = useContext(authContext);
-
-	console.log(test);
+	const { isLoggedIn } = useContext(authContext);
 
 	async function getTweets(): Promise<void> {
 		const tweets: ITweet[] = await APIHandler.getAllTweets();

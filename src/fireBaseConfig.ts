@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { GoogleAuthProvider, getAuth, signInWithPopup, signOut } from "firebase/auth";
-import { getFirestore, collection, query, getDocs, orderBy } from "@firebase/firestore";
+import { getFirestore, collection, query, getDocs, orderBy, where, addDoc } from "@firebase/firestore";
 // import { getStorage } from "firebase/storage";
 import { ITweet, IUserDetails } from "./global/interfaces";
 
@@ -24,13 +24,15 @@ const db = getFirestore(app);
 // const storage = getStorage();
 
 // DB's collection
-// const usersCollection = collection(db, "users");
+const usersCollection = collection(db, "users");
 const tweetsCollection = collection(db, "tweets");
 
 interface IAPIHandler {
 	getAllTweets: () => Promise<ITweet[]>;
 	googleAuth: () => Promise<any>;
 	logout: () => Promise<any>;
+	getUserByUID: (uid: string) => Promise<null | IUserDetails>;
+	addNewUserToDb: (userProfileObj: IUserDetails) => Promise<any>;
 }
 
 export const APIHandler: IAPIHandler = {
@@ -43,6 +45,23 @@ export const APIHandler: IAPIHandler = {
 
 	logout: async () => {
 		await signOut(auth);
+	},
+
+	// Get user by ID
+	getUserByUID: async (uid: string) => {
+		const q = query(usersCollection, where("uid", "==", uid));
+		const data = await getDocs(q);
+		let user = data.docs[0];
+
+		if (!user) return null;
+		const test: IUserDetails = { ...(user.data() as IUserDetails), userDocumentId: user.id };
+		return test;
+		// return userInfo
+	},
+
+	// add new user
+	addNewUserToDb: async (userProfileObj: IUserDetails) => {
+		await addDoc(usersCollection, userProfileObj);
 	},
 
 	getAllTweets: async (): Promise<ITweet[]> => {

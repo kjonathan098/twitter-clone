@@ -19,14 +19,30 @@ const AuthProvider: React.FC<IProps> = ({ children }) => {
 	const [currentUser, setCurrentUser] = useState<IUserDetails | null>(null);
 	const test = "test";
 
+	// manage current user signedIn
+
+	async function manageCurrentUser(userDetails: IUserDetails) {
+		// check if user exist in DB
+		const userExist: IUserDetails | null = await APIHandler.getUserByUID(userDetails.uid);
+		if (!userExist) {
+			APIHandler.addNewUserToDb(userDetails);
+			setCurrentUser(userDetails);
+			setLoading(false);
+			return;
+		}
+		setCurrentUser(userExist);
+		setLoading(false);
+		return;
+	}
+
 	//listen to auth changes
 	useEffect(() => {
 		const unsubscribe = auth.onAuthStateChanged((user) => {
 			setLoading(true);
 			if (user) {
-				const userDetails: IUserDetails = { name: user.displayName, email: user.email, profilePic: user.photoURL, wallpaperPic: null, uid: user.uid };
+				const userDetails: IUserDetails = { name: user.displayName, email: user.email, profilePic: user.photoURL, wallpaperPic: null, uid: user.uid, joinedDate: user.metadata.creationTime };
 				setIsLoggedIn(true);
-				console.log(userDetails);
+				manageCurrentUser(userDetails);
 			} else {
 				setCurrentUser(null);
 				setIsLoggedIn(false);

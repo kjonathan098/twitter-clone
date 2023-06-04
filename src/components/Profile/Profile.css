@@ -1,0 +1,140 @@
+#profile_master {
+	/* background-color: red; */
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	overflow: scroll;
+}
+.prompt_blur_section {
+	opacity: 0.5;
+	filter: blur(10px);
+}
+
+#profile_header {
+	/* background-color: green; */
+	padding: 5px;
+	color: black;
+}
+
+.profile_user_name {
+	font-size: 30px;
+	margin-bottom: 5px;
+	font-weight: 900;
+}
+
+.user_tweets_length {
+	font-size: 15px;
+	color: var(--light-gray);
+}
+
+#profile_pics {
+	/* background-color: green; */
+}
+.wallPaper_Container {
+	/* background-color: purple; */
+	height: 199px;
+}
+
+.wallPaper_Container img {
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+}
+
+.edit_container {
+	/* background-color: violet; */
+	display: flex;
+	justify-content: flex-end;
+	position: relative;
+	padding: 10px;
+	margin-bottom: 5px;
+}
+
+.profile_pic_container {
+	position: absolute;
+	left: 50px;
+	top: -70px;
+	background-color: orange;
+	width: 125px;
+	height: 125px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 2px solid white;
+	font-size: 30px;
+	color: white;
+	object-fit: cover;
+}
+
+.edit_container button {
+	background-color: transparent;
+	padding: 10px 40px;
+	border-radius: 40px;
+	border: 1px solid var(--light-gray);
+	font-weight: 800;
+}
+.edit_container button:hover {
+	cursor: pointer;
+}
+
+#profile_name {
+	/* background-color: aquamarine; */
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	padding: 10px;
+}
+
+#profile_name > div:first-child {
+	/* background-color: red; */
+	font-size: 20px;
+}
+#profile_name > div:nth-child(2) {
+	/* background-color: green; */
+	font-size: 15px;
+	color: var(--light-gray);
+}
+#profile_name > div:nth-child(3) {
+	display: flex;
+	gap: 5px;
+	align-items: center;
+}
+#profile_name > div:nth-child(4) {
+	display: flex;
+	gap: 5px;
+	align-items: center;
+}
+
+#profile_filters {
+	/* background-color: dodgerblue; */
+	display: flex;
+	justify-content: space-between;
+	border-bottom: 1px solid var(--extra-light-gray);
+}
+
+#profile_filters div {
+	/* background-color: green; */
+	flex-grow: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 20px;
+	font-weight: 900;
+}
+
+#profile_filters div:hover {
+	cursor: pointer;
+	background-color: var(--extra-extra-light-gray);
+}
+
+#profile_filters div.active {
+	background-color: var(--extra-light-gray);
+}
+
+#profile_suggestions {
+	/* background-color: green; */
+	/* overflow: scroll; */
+	flex-grow: 1;
+}

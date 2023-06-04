@@ -36,6 +36,7 @@ interface IAPIHandler {
 	liveTweets: (setTweets: React.Dispatch<React.SetStateAction<ITweet[]>>) => Promise<any>;
 	likeTweet: (docId: string, uid: string) => Promise<any>;
 	unLikeTweet: (docId: string, uid: string) => Promise<any>;
+	getUserTweet: (uid: string) => Promise<ITweet[]>;
 }
 
 export const APIHandler: IAPIHandler = {
@@ -78,6 +79,21 @@ export const APIHandler: IAPIHandler = {
 			tweetsList.push(tweetData);
 		});
 		return tweetsList;
+	},
+
+	// get user Tweets
+
+	getUserTweet: async (uid) => {
+		const q = query(tweetsCollection, where("uid", "==", uid));
+		const tweets = await getDocs(q);
+		const userTweets: ITweet[] = [];
+		tweets.forEach((tweet) => {
+			const tweetData = tweet.data() as ITweet;
+			tweetData.docId = tweet.id;
+			userTweets.push(tweetData);
+		});
+
+		return userTweets;
 	},
 
 	// listen to live tweets udpates

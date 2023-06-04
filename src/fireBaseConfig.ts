@@ -1,8 +1,8 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { getFirestore, collection, query, getDocs, orderBy } from "@firebase/firestore";
 // import { getStorage } from "firebase/storage";
-import { ITweet } from "./global/interfaces";
+import { ITweet, IUserDetails } from "./global/interfaces";
 
 const firebaseConfig = {
 	apiKey: "AIzaSyDYkXf-2DATnNEORirDibeTdSmaCJUjRGY",
@@ -29,9 +29,17 @@ const tweetsCollection = collection(db, "tweets");
 
 interface IAPIHandler {
 	getAllTweets: () => Promise<ITweet[]>;
+	googleAuth: () => Promise<any>;
 }
 
 export const APIHandler: IAPIHandler = {
+	googleAuth: async (): Promise<any> => {
+		const provider = new GoogleAuthProvider();
+		const results = await signInWithPopup(auth, provider);
+		const userDetails: IUserDetails = { name: results.user.displayName, email: results.user.email, profilePic: results.user.photoURL, wallpaperPic: null, uid: results.user.uid };
+		return userDetails;
+	},
+
 	getAllTweets: async (): Promise<ITweet[]> => {
 		const q = query(tweetsCollection, orderBy("dateCreated", "desc"));
 		const tweets = await getDocs(q);

@@ -1,5 +1,6 @@
 import { SetStateAction, Dispatch, useState } from "react";
 import useForm from "../../customHooks/useForm";
+import { APIHandler } from "../../fireBaseConfig";
 interface IProps {
 	setRegister: Dispatch<SetStateAction<boolean>>;
 }
@@ -33,14 +34,14 @@ const Login = ({ setRegister }: IProps) => {
 			{/* <button className="login_btn authBtn" onClick={handleLogin}>
 				Login
 			</button> */}
-			{/* <button
+			<button
 				className="login_google_btn authBtn"
 				onClick={() => {
 					APIHandler.googleAuth();
 				}}
 			>
 				Or Sign-in with Google
-			</button> */}
+			</button>
 			<button className="login_demo_btn authBtn">Click here to use our Demo account</button>
 			<div>
 				Dont have an account?{" "}

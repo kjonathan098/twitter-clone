@@ -14,24 +14,25 @@ import SideMenu from "../SideMenu/SideMenu";
 const Profile = () => {
 	const [screenView, setScreenView] = useState(1);
 	const [editProfile, setEditProfile] = useState(false);
-	const [likedTweets, setLikeTweets] = useState();
+	const [likedTweets, setLikeTweets] = useState<ITweet[]>([]);
 	const [loadingProfile, setLoadingProfile] = useState(false);
+	const [fecthingTweets, setFecthingTweets] = useState(false);
 	const { currentUser } = useContext(authContext);
-	const { userProfileInfo, fetchNewUser, userTweets, loading } = useContext(profileContext);
+	const { userProfileInfo, fetchNewUser, userTweets, loading, getUserLikes } = useContext(profileContext);
 
 	useEffect(() => {
 		if (!userProfileInfo) return fetchNewUser(currentUser);
 		console.log(userTweets, "userTweets");
 	}, [userProfileInfo, currentUser]);
 
-	// const getUserLikes = async () => {
-	// 	setLoadingProfile(true);
-	// 	const likedTweets = await APIHandler.getUserLikes(userProfileInfo.uid);
-	// 	if (!likedTweets) return setLoadingProfile(false);
-	// 	setLikeTweets(likedTweets);
-	// 	setLoadingProfile(false);
-	// 	return;
-	// };
+	const fetchUserLikes = async () => {
+		setFecthingTweets(true);
+		const userLikes: ITweet[] | undefined = await getUserLikes();
+		if (!userLikes) return;
+		setLikeTweets(userLikes);
+		setFecthingTweets(false);
+		return;
+	};
 
 	if (loading || !currentUser || !userProfileInfo) return <>Loading</>;
 	return (
@@ -88,7 +89,7 @@ const Profile = () => {
 								className={screenView === 2 ? "active" : undefined}
 								onClick={() => {
 									setScreenView(2);
-									// getUserLikes();
+									fetchUserLikes();
 								}}
 							>
 								Likes
@@ -107,10 +108,31 @@ const Profile = () => {
 								userTweets?.map((tweet) => {
 									return <TweetCard tweet={tweet} loading={false} currentUser={currentUser} />;
 								})}
-							{/* {screenView === 2 &&
-						likedTweets?.map((tweet: ITweet) => {
-							return <TweetCard tweet={tweet} loading={false} currentUser={currentUser} />;
-						})} */}
+							{
+								screenView === 2 && (
+									<>
+										{fecthingTweets ? (
+											<>loading</>
+										) : (
+											<>
+												{likedTweets.length ? (
+													<>
+														{likedTweets.map((tweet: ITweet) => {
+															return <TweetCard tweet={tweet} loading={false} currentUser={currentUser} />;
+														})}
+													</>
+												) : (
+													<>no tweets</>
+												)}
+											</>
+										)}
+									</>
+								)
+
+								// likedTweets?.map((tweet: ITweet) => {
+								// 	return <TweetCard tweet={tweet} loading={false} currentUser={currentUser} />;
+								// })
+							}
 						</section>
 					</div>
 					<SideMenu />

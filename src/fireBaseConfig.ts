@@ -37,6 +37,7 @@ interface IAPIHandler {
 	likeTweet: (docId: string, uid: string) => Promise<any>;
 	unLikeTweet: (docId: string, uid: string) => Promise<any>;
 	getUserTweet: (uid: string) => Promise<ITweet[]>;
+	getUserLikes: (uid: string) => Promise<ITweet[] | undefined>;
 }
 
 export const APIHandler: IAPIHandler = {
@@ -124,5 +125,19 @@ export const APIHandler: IAPIHandler = {
 		const tweetDocRef = doc(tweetsCollection, docId);
 		const updateObj = { likes: arrayRemove(uid) };
 		await updateDoc(tweetDocRef, updateObj);
+	},
+	getUserLikes: async (uid) => {
+		const q = query(tweetsCollection, where("likes", "array-contains", uid));
+		const data = await getDocs(q);
+		const tweets = data.docs;
+		if (!tweets.length) return undefined;
+
+		const likedTweets: ITweet[] = [];
+		tweets.forEach((tweet) => {
+			const tweetData = tweet.data() as ITweet;
+			tweetData.docId = tweet.id;
+			likedTweets.push(tweetData);
+		});
+		return likedTweets;
 	},
 };

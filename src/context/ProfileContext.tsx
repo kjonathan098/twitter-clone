@@ -9,6 +9,7 @@ interface ProfileContextValie {
 	fetchNewUser: (user: IUserDetails | null) => void;
 	userTweets: ITweet[];
 	loading: boolean;
+	getUserLikes: () => Promise<ITweet[] | undefined>;
 }
 
 export const profileContext = createContext<ProfileContextValie>({} as ProfileContextValie);
@@ -26,7 +27,6 @@ const ProfileProvider: React.FC<IProps> = ({ children }) => {
 	useEffect(() => {
 		if (!userProfileInfo) return;
 		setLoading(true);
-
 		const getTweets = async (userProfileInfo: IUserDetails) => {
 			const tweets = await fetchTweets(userProfileInfo.uid);
 			setUserTweets(tweets);
@@ -43,8 +43,13 @@ const ProfileProvider: React.FC<IProps> = ({ children }) => {
 	const fetchNewUser = (userObj: IUserDetails | null) => {
 		setuserProfileInfo(userObj);
 	};
+
+	const getUserLikes = async (): Promise<ITweet[] | undefined> => {
+		const likedTweets = await APIHandler.getUserLikes(userProfileInfo!.uid);
+		return likedTweets;
+	};
 	const test = "test";
-	return <profileContext.Provider value={{ test, userProfileInfo, fetchNewUser, userTweets, loading }}>{children}</profileContext.Provider>;
+	return <profileContext.Provider value={{ test, userProfileInfo, fetchNewUser, userTweets, loading, getUserLikes }}>{children}</profileContext.Provider>;
 };
 
 export default ProfileProvider;

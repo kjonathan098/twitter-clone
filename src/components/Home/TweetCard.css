@@ -86,7 +86,7 @@
 	color: rgb(95, 170, 95);
 }
 .tweet_card_bottom .like:hover {
-	color: rgb(242, 94, 94);
+	color: rgb(241, 0, 0);
 }
 .tweet_card_bottom .liked {
 	color: rgb(242, 94, 94);

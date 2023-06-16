@@ -35,7 +35,6 @@ const TweetCard = ({ tweet, loading, currentUser }: Iprops) => {
 
 		// check if tweet is already like then unlike it
 		if (likedByUser) {
-			console.log("unliking");
 			await APIHandler.unLikeTweet(tweet.docId, currentUser.uid);
 			setLikedByUser(false);
 			tweet.likes.filter((uid) => {
@@ -44,6 +43,7 @@ const TweetCard = ({ tweet, loading, currentUser }: Iprops) => {
 
 			return;
 		}
+
 		setLikedByUser(true);
 		tweet.likes.push(currentUser.uid);
 		const res = await APIHandler.likeTweet(tweet.docId, currentUser.uid);
@@ -83,7 +83,7 @@ const TweetCard = ({ tweet, loading, currentUser }: Iprops) => {
 						<div className="action reTweet">
 							<FaRetweet /> <div>125</div>
 						</div>
-						<div className={`action like ${likedByUser && "liked"}`} onClick={handleLike}>
+						<div className={`action like filled ${likedByUser && "liked"}`} onClick={handleLike}>
 							<AiOutlineHeart /> <div>{tweet.likes ? tweet.likes.length : "0"}</div>
 						</div>
 						<div className="action">

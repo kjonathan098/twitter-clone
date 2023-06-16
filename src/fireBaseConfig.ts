@@ -115,7 +115,6 @@ export const APIHandler: IAPIHandler = {
 		const updateObj = { likes: arrayUnion(uid) };
 
 		const res = await updateDoc(tweetDocRef, updateObj);
-		console.log(res);
 
 		// upd user likes
 

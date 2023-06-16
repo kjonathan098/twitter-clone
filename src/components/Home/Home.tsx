@@ -26,11 +26,10 @@ const Home = () => {
 		setLoading(false);
 	}, []);
 
-	if (!isLoggedIn || !currentUser) return <Auth />;
+	// if (!isLoggedIn || !currentUser) return <Auth />;
 
 	return (
 		<div id="home_master">
-			<NavBar />
 			<div id="feed_master">
 				<div className="feed_main">
 					<div className="page_title">Home</div>
@@ -38,12 +37,11 @@ const Home = () => {
 						<CreateTweet />
 						<div>
 							{tweets?.map((tweet: ITweet) => {
-								return <TweetCard tweet={tweet} loading={loading} currentUser={currentUser} />;
+								return <TweetCard tweet={tweet} loading={loading} currentUser={currentUser!} />;
 							})}
 						</div>
 					</div>
 				</div>
-				<SideMenu />
 			</div>
 		</div>
 	);

@@ -1,9 +1,9 @@
 #profile_master {
 	/* background-color: red; */
-	width: 100%;
 	display: flex;
 	position: relative;
-	overflow: scroll;
+	/* overflow: scroll; */
+	flex-grow: 1;
 }
 #profile_master span {
 	/* background-color: green; */
@@ -19,6 +19,10 @@
 	display: flex;
 	/* flex-direction: column; */
 	flex-grow: 1;
+}
+.main_profile_container div {
+	/* background-color: blue; */
+	width: 100%;
 }
 #profile_header {
 	/* background-color: green; */
@@ -143,7 +147,9 @@
 }
 
 #profile_suggestions {
-	/* background-color: green; */
-	/* overflow: scroll; */
-	flex-grow: 1;
+	background-color: green;
+	overflow: scroll;
+	height: 100%;
+	overflow-y: hidden; /* Hide vertical scrollbar */
+	overflow-x: hidden; /* Hide horizontal scrollbar */
 }

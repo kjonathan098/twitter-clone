@@ -17,7 +17,7 @@ const Profile = () => {
 	const [likedTweets, setLikeTweets] = useState<ITweet[]>([]);
 	const [loadingProfile, setLoadingProfile] = useState(false);
 	const [fecthingTweets, setFecthingTweets] = useState(false);
-	const { currentUser } = useContext(authContext);
+	const { currentUser, currentUserLikes } = useContext(authContext);
 	const { userProfileInfo, fetchNewUser, userTweets, loading, getUserLikes } = useContext(profileContext);
 
 	useEffect(() => {
@@ -25,26 +25,26 @@ const Profile = () => {
 		console.log(userTweets, "userTweets");
 	}, [userProfileInfo, currentUser]);
 
-	const fetchUserLikes = async () => {
-		setFecthingTweets(true);
-		const userLikes: ITweet[] | undefined = await getUserLikes();
-		if (!userLikes) return;
-		setLikeTweets(userLikes);
-		setFecthingTweets(false);
-		return;
-	};
+	// const fetchUserLikes = async () => {
+	// 	setFecthingTweets(true);
+	// 	const userLikes: ITweet[] | undefined = await getUserLikes();
+	// 	if (!userLikes) return;
+	// 	setLikeTweets(userLikes);
+	// 	setFecthingTweets(false);
+	// 	return;
+	// };
 
 	if (loading || !currentUser || !userProfileInfo) return <>Loading</>;
 	return (
 		<div id="profile_master">
 			<span className={editProfile ? "prompt_blur_section" : undefined}>
-				<NavBar />
 				<div className="main_profile_container">
 					<div>
 						<section id="profile_header">
 							<div className="profile_user_name">{userProfileInfo.name}</div>
 							<div className="user_tweets_length">{`${userTweets?.length} tweets`}</div>
 						</section>
+
 						<section id="profile_pics">
 							<div className="wallPaper_Container">
 								<img src={userProfileInfo.wallpaperPic || defaultWallpaper} alt="" />
@@ -89,7 +89,7 @@ const Profile = () => {
 								className={screenView === 2 ? "active" : undefined}
 								onClick={() => {
 									setScreenView(2);
-									fetchUserLikes();
+									// fetchUserLikes();
 								}}
 							>
 								Likes
@@ -103,6 +103,7 @@ const Profile = () => {
 								Following
 							</div>
 						</section>
+
 						<section id="profile_suggestions">
 							{screenView === 1 &&
 								userTweets?.map((tweet) => {
@@ -115,9 +116,9 @@ const Profile = () => {
 											<>loading</>
 										) : (
 											<>
-												{likedTweets.length ? (
+												{currentUserLikes.length ? (
 													<>
-														{likedTweets.map((tweet: ITweet) => {
+														{currentUserLikes.map((tweet: ITweet) => {
 															return <TweetCard tweet={tweet} loading={false} currentUser={currentUser} />;
 														})}
 													</>
@@ -135,7 +136,6 @@ const Profile = () => {
 							}
 						</section>
 					</div>
-					<SideMenu />
 				</div>
 				{/* <EditProfile editProfile={editProfile} setEditProfile={setEditProfile} /> */}
 			</span>

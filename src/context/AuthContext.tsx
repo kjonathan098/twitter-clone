@@ -1,12 +1,13 @@
 import React, { createContext, useEffect, useState } from "react";
 import { APIHandler, auth } from "../fireBaseConfig";
-import { IUserDetails } from "../global/interfaces";
+import { ITweet, IUserDetails } from "../global/interfaces";
 
 interface AuthContextValue {
 	test: string;
 	loading: boolean;
 	isLoggedIn: boolean;
 	currentUser: IUserDetails | null;
+	currentUserLikes: ITweet[];
 }
 export const authContext = createContext<AuthContextValue>({} as AuthContextValue);
 
@@ -18,9 +19,17 @@ const AuthProvider: React.FC<IProps> = ({ children }) => {
 	const [loading, setLoading] = useState(false);
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [currentUser, setCurrentUser] = useState<IUserDetails | null>(null);
+	const [currentUserLikes, setcurrentUserLikes] = useState<ITweet[]>([]);
 	const test = "test";
 
 	// manage current user signedIn
+
+	async function fetchUserTweetLikes(uid: string): Promise<void> {
+		const userLikes: ITweet[] | undefined = await APIHandler.getUserLikes(uid);
+		if (!userLikes) return;
+		setcurrentUserLikes(userLikes);
+		setLoading(false);
+	}
 
 	async function manageCurrentUser(userDetails: IUserDetails) {
 		// check if user exist in DB
@@ -32,7 +41,7 @@ const AuthProvider: React.FC<IProps> = ({ children }) => {
 			return;
 		}
 		setCurrentUser(userExist);
-		setLoading(false);
+		fetchUserTweetLikes(userExist.uid);
 		return;
 	}
 
@@ -55,7 +64,7 @@ const AuthProvider: React.FC<IProps> = ({ children }) => {
 		};
 	}, []);
 
-	return <authContext.Provider value={{ test, loading, isLoggedIn, currentUser }}>{children}</authContext.Provider>;
+	return <authContext.Provider value={{ test, loading, isLoggedIn, currentUser, currentUserLikes }}>{children}</authContext.Provider>;
 };
 
 export default AuthProvider;

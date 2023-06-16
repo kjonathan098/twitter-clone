@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { ITweet, IUserDetails } from "../../global/interfaces";
 import "./TweetCard.css";
 import { APIHandler } from "../../fireBaseConfig";
@@ -16,6 +16,7 @@ interface Iprops {
 const TweetCard = ({ tweet, loading, currentUser }: Iprops) => {
 	const [tweetUserInfo, setTweetUserInfo] = useState<IUserDetails | null>();
 	const [likedByUser, setLikedByUser] = useState<boolean>(false);
+	const [tweetLikes, setTweetLikes] = useState<string[]>([]);
 
 	useEffect(() => {
 		const getTweetUserName = async () => {
@@ -23,30 +24,32 @@ const TweetCard = ({ tweet, loading, currentUser }: Iprops) => {
 			setTweetUserInfo(tweetAuthorInfo);
 		};
 		getTweetUserName();
-
 		if (!tweet.likes) return;
+		setTweetLikes([...tweet.likes]);
+
 		const likedByUser = tweet.likes.find((userId) => userId === currentUser.uid);
 		if (likedByUser) return setLikedByUser(true);
 		return;
 	}, [currentUser]);
 
 	async function handleLike(): Promise<void> {
-		console.log("handleling like action");
+		console.log({ tweetLikes }, "tweetLikes");
 
 		// check if tweet is already like then unlike it
 		if (likedByUser) {
 			await APIHandler.unLikeTweet(tweet.docId, currentUser.uid);
 			setLikedByUser(false);
-			tweet.likes.filter((uid) => {
+			const newlikes = tweetLikes.filter((uid) => {
 				return uid !== currentUser.uid;
 			});
-
+			setTweetLikes([...newlikes]);
 			return;
 		}
 
 		setLikedByUser(true);
-		tweet.likes.push(currentUser.uid);
-		const res = await APIHandler.likeTweet(tweet.docId, currentUser.uid);
+		const newLikes = [...tweetLikes, currentUser.uid];
+		setTweetLikes(newLikes);
+		APIHandler.likeTweet(tweet.docId, currentUser.uid);
 	}
 
 	function openUserProfile() {
@@ -84,7 +87,7 @@ const TweetCard = ({ tweet, loading, currentUser }: Iprops) => {
 							<FaRetweet /> <div>125</div>
 						</div>
 						<div className={`action like filled ${likedByUser && "liked"}`} onClick={handleLike}>
-							<AiOutlineHeart /> <div>{tweet.likes ? tweet.likes.length : "0"}</div>
+							<AiOutlineHeart /> <div>{tweetLikes.length ? tweetLikes.length : "0"}</div>
 						</div>
 						<div className="action">
 							<BiBarChart /> <div>456</div>

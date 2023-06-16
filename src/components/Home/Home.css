@@ -2,6 +2,7 @@
 	/* background-color: purple; */
 	display: flex;
 	flex-grow: 1;
+	border-right: 2px solid var(--extra-extra-light-gray);
 }
 
 #feed_master {

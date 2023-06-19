@@ -5,7 +5,7 @@ export interface ITweet {
 	media: string | null;
 	tweet: string;
 	uid: string;
-	docId: string;
+	docId?: string;
 }
 
 export interface IUserDetails {

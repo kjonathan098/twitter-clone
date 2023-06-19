@@ -3,11 +3,16 @@ import "./CreateTweet.css";
 import { authContext } from "../../context/AuthContext";
 import ProfilePic from "../Utils/ProfilePic";
 import { AiOutlinePicture, AiFillCloseCircle } from "react-icons/ai";
+import useNewTweet from "../../customHooks/useNewTweet";
+import { APIHandler } from "../../fireBaseConfig";
+import { ITweet } from "../../global/interfaces";
 
 const CreateTweet = () => {
 	const [tweet, setTweet] = useState<string>("");
 	const [uploadMedia, setUploadMedia] = useState<File | null>(null);
 	const [mediaPreview, setMediaPreview] = useState<string | null>(null);
+
+	const [createNewTweet] = useNewTweet();
 
 	const { currentUser } = useContext(authContext);
 	const tweetMediaRef: React.RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
@@ -16,8 +21,10 @@ const CreateTweet = () => {
 		setTweet(e.target.value);
 	}
 
-	function uploadNewTweet(e: React.FormEvent<HTMLFormElement>) {
+	async function uploadNewTweet(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
+		const newTweet: ITweet = await createNewTweet(tweet, currentUser, uploadMedia);
+		const res = await APIHandler.createNewTweet(newTweet);
 	}
 
 	function handleTweetCounter() {
@@ -40,7 +47,7 @@ const CreateTweet = () => {
 		<div className="create_tweet-main">
 			<div>{currentUser && <ProfilePic profilePic={currentUser.profilePic} size={80} openUserProfile={false} />}</div>
 			<div className="tweet_form-container">
-				<form onSubmit={uploadNewTweet} >
+				<form onSubmit={uploadNewTweet}>
 					<textarea name="" id="tweet_form" placeholder="What's Happening?!" onChange={handleTweetInput}></textarea>
 					{mediaPreview && (
 						<div className="img_container">

@@ -37,7 +37,7 @@ const TweetCard = ({ tweet, loading, currentUser }: Iprops) => {
 
 		// check if tweet is already like then unlike it
 		if (likedByUser) {
-			await APIHandler.unLikeTweet(tweet.docId, currentUser.uid);
+			await APIHandler.unLikeTweet(tweet.docId!, currentUser.uid);
 			setLikedByUser(false);
 			const newlikes = tweetLikes.filter((uid) => {
 				return uid !== currentUser.uid;
@@ -49,7 +49,7 @@ const TweetCard = ({ tweet, loading, currentUser }: Iprops) => {
 		setLikedByUser(true);
 		const newLikes = [...tweetLikes, currentUser.uid];
 		setTweetLikes(newLikes);
-		APIHandler.likeTweet(tweet.docId, currentUser.uid);
+		APIHandler.likeTweet(tweet.docId!, currentUser.uid);
 	}
 
 	function openUserProfile() {

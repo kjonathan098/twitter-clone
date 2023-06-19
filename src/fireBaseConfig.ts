@@ -3,6 +3,7 @@ import { GoogleAuthProvider, getAuth, signInWithPopup, signOut } from "firebase/
 import { getFirestore, collection, query, getDocs, orderBy, where, addDoc, onSnapshot, doc, arrayUnion, updateDoc, arrayRemove } from "@firebase/firestore";
 // import { getStorage } from "firebase/storage";
 import { ITweet, IUserDetails } from "./global/interfaces";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const firebaseConfig = {
 	apiKey: "AIzaSyDYkXf-2DATnNEORirDibeTdSmaCJUjRGY",
@@ -21,7 +22,7 @@ export const auth = getAuth(app);
 
 // get DB
 const db = getFirestore(app);
-// const storage = getStorage();
+const storage = getStorage();
 
 // DB's collection
 const usersCollection = collection(db, "users");
@@ -38,6 +39,8 @@ interface IAPIHandler {
 	unLikeTweet: (docId: string, uid: string) => Promise<any>;
 	getUserTweet: (uid: string) => Promise<ITweet[]>;
 	getUserLikes: (uid: string) => Promise<ITweet[] | undefined>;
+	createNewTweet: (tweet: ITweet) => Promise<any>;
+	uploadMedia: (userId: string, imageFile: File, mediaType: string) => Promise<string>;
 }
 
 export const APIHandler: IAPIHandler = {
@@ -138,5 +141,16 @@ export const APIHandler: IAPIHandler = {
 			likedTweets.push(tweetData);
 		});
 		return likedTweets;
+	},
+	createNewTweet: async (tweet) => {
+		const res = await addDoc(tweetsCollection, tweet);
+		return res;
+	},
+	uploadMedia: async (userId, imageFile, mediaType) => {
+		console.log(imageFile);
+		const ImageRef = ref(storage, `${userId}-${mediaType}-${imageFile.name}-image`);
+		const uploadedFile = await uploadBytes(ImageRef, imageFile);
+		const imageURL = await getDownloadURL(uploadedFile.ref);
+		return imageURL;
 	},
 };

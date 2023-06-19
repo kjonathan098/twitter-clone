@@ -16,6 +16,39 @@
 	font-size: 20px;
 	padding: 10px;
 }
+.img_container {
+	/* background-color: green; */
+	position: relative;
+	display: flex;
+	justify-content: center;
+}
+.tweet_form-container form img {
+	width: auto;
+	height: 376px;
+	border-radius: 10px;
+}
+
+.delete_media {
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	/* color: white; */
+	font-size: 1.5rem;
+	background-color: var(--main-blue);
+	border-radius: 50%;
+}
+.delete_media:hover {
+	cursor: pointer;
+}
+.upload_media_icon {
+	color: var(--main-blue);
+	font-size: 1.5rem;
+}
+.upload_media_icon:hover {
+	cursor: pointer;
+	/* background-color: var(--main-blue); */
+	border-radius: 50%;
+}
 .tweet_form-options-container {
 	/* background-color: red; */
 	display: flex;

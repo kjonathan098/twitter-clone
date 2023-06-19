@@ -3,7 +3,7 @@
 	display: flex;
 	position: relative;
 	/* overflow: scroll; */
-	flex-grow: 1;
+	width: 50%;
 }
 #profile_master span {
 	/* background-color: green; */

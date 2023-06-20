@@ -62,7 +62,6 @@ const Profile = () => {
 								</div>
 							)}
 						</section>
-
 						<section id="profile_name">
 							<div>{userProfileInfo.name}</div>
 							<div>{`@${userProfileInfo.name}`}</div>
@@ -137,8 +136,8 @@ const Profile = () => {
 						</section>
 					</div>
 				</div>
-				{/* <EditProfile editProfile={editProfile} setEditProfile={setEditProfile} /> */}
 			</span>
+			<EditProfile editProfile={editProfile} setEditProfile={setEditProfile} />
 		</div>
 	);
 };

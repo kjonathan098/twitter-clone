@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 import { GoogleAuthProvider, getAuth, signInWithPopup, signOut } from "firebase/auth";
 import { getFirestore, collection, query, getDocs, orderBy, where, addDoc, onSnapshot, doc, arrayUnion, updateDoc, arrayRemove } from "@firebase/firestore";
 // import { getStorage } from "firebase/storage";
-import { ITweet, IUserDetails } from "./global/interfaces";
+import { IEditProfile, ITweet, IUserDetails } from "./global/interfaces";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const firebaseConfig = {
@@ -41,6 +41,9 @@ interface IAPIHandler {
 	getUserLikes: (uid: string) => Promise<ITweet[] | undefined>;
 	createNewTweet: (tweet: ITweet) => Promise<any>;
 	uploadMedia: (userId: string, imageFile: File, mediaType: string) => Promise<string>;
+	uploadProfilePic: (userId: string, imageFile: File) => Promise<string>;
+	uploadWallpaperPic: (userId: string, imageFile: File) => Promise<string>;
+	updateUser: (docId: string, updateObj: IEditProfile) => Promise<void>;
 }
 
 export const APIHandler: IAPIHandler = {
@@ -70,6 +73,24 @@ export const APIHandler: IAPIHandler = {
 	// add new user
 	addNewUserToDb: async (userProfileObj: IUserDetails) => {
 		await addDoc(usersCollection, userProfileObj);
+	},
+
+	updateUser: async (docId: string, updateObj: IEditProfile) => {
+		const userDocRef = doc(db, "users", docId);
+
+		// Convert updateObj to the expected format for updateDoc
+		const updateFields: { [key: string]: any } = {};
+		if (updateObj.name !== null) {
+			updateFields["name"] = updateObj.name;
+		}
+		if (updateObj.profilePic !== null) {
+			updateFields["profilePic"] = updateObj.profilePic;
+		}
+		if (updateObj.wallpaperPic !== null) {
+			updateFields["wallpaperPic"] = updateObj.wallpaperPic;
+		}
+
+		await updateDoc(userDocRef, updateFields);
 	},
 
 	// get all tweets
@@ -150,6 +171,18 @@ export const APIHandler: IAPIHandler = {
 		console.log(imageFile);
 		const ImageRef = ref(storage, `${userId}-${mediaType}-${imageFile.name}-image`);
 		const uploadedFile = await uploadBytes(ImageRef, imageFile);
+		const imageURL = await getDownloadURL(uploadedFile.ref);
+		return imageURL;
+	},
+	uploadProfilePic: async (userId, imageFile) => {
+		const profileImageRef = ref(storage, `${userId}-profile-image`);
+		const uploadedFile = await uploadBytes(profileImageRef, imageFile);
+		const imageURL = await getDownloadURL(uploadedFile.ref);
+		return imageURL;
+	},
+	uploadWallpaperPic: async (userId, imageFile) => {
+		const wallpaperImageRef = ref(storage, `${userId}-wallpaper-image`);
+		const uploadedFile = await uploadBytes(wallpaperImageRef, imageFile);
 		const imageURL = await getDownloadURL(uploadedFile.ref);
 		return imageURL;
 	},

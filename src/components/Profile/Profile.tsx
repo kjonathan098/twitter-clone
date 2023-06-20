@@ -20,9 +20,10 @@ const Profile = () => {
 	const { currentUser, currentUserLikes } = useContext(authContext);
 	const { userProfileInfo, fetchNewUser, userTweets, loading, getUserLikes } = useContext(profileContext);
 
+	console.log({ currentUser }, { userProfileInfo });
+
 	useEffect(() => {
 		if (!userProfileInfo) return fetchNewUser(currentUser);
-		console.log(userTweets, "userTweets");
 	}, [userProfileInfo, currentUser]);
 
 	// const fetchUserLikes = async () => {

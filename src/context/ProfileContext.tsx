@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
 import { APIHandler, auth } from "../fireBaseConfig";
 import { ITweet, IUserDetails } from "../global/interfaces";
 import { authContext } from "./AuthContext";
@@ -23,6 +23,10 @@ const ProfileProvider: React.FC<IProps> = ({ children }) => {
 	const [userProfileInfo, setuserProfileInfo] = useState<IUserDetails | null>(null);
 	const [loading, setLoading] = useState(false);
 	const { currentUser } = useContext(authContext);
+
+	useEffect(() => {
+		setuserProfileInfo(currentUser);
+	}, [currentUser]);
 
 	useEffect(() => {
 		if (!userProfileInfo) return;

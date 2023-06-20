@@ -17,3 +17,8 @@ export interface IUserDetails {
 	profilePic: string;
 	wallpaperPic: string | null;
 }
+export interface IEditProfile {
+	name: string | null;
+	profilePic: string | null;
+	wallpaperPic: string | null;
+}

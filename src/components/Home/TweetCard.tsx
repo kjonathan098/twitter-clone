@@ -49,6 +49,7 @@ const TweetCard = ({ tweet, loading, currentUser }: Iprops) => {
 	}
 
 	useEffect(() => {
+		if (!currentUser) return;
 		const getTweetUserName = async () => {
 			const tweetAuthorInfo = await APIHandler.getUserByUID(tweet.uid);
 			setTweetUserInfo(tweetAuthorInfo);

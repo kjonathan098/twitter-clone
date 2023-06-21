@@ -33,7 +33,7 @@ function App() {
 	if (loading) return <>loading...</>;
 	if (!isLoggedIn) return <Auth />;
 	return (
-		<AuthProvider> 
+		<AuthProvider>
 			<ProfileProvider>
 				<BrowserRouter>
 					<div id="master_container">

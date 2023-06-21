@@ -7,6 +7,7 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 import { BsBookmark } from "react-icons/bs";
 import { CiViewList, CiCircleMore } from "react-icons/ci";
 import logo from "../../media/twitter_logo.png";
+
 const NavBar = () => {
 	return (
 		<nav>

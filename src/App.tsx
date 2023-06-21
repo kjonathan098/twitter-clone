@@ -10,6 +10,7 @@ import ProfileProvider from "./context/ProfileContext";
 import Auth from "./components/Auth/Auth";
 import NavBar from "./components/NavBar/NavBar";
 import SideMenu from "./components/SideMenu/SideMenu";
+import Trending from "./components/Trending/Trending";
 
 function App() {
 	const [loading, setLoading] = useState(true);
@@ -42,6 +43,7 @@ function App() {
 							<Routes>
 								<Route path="/" element={<Home />} />
 								<Route path="/profile" element={<Profile />} />
+								<Route path="/trending" element={<Trending />} />
 							</Routes>
 							<SideMenu />
 						</div>

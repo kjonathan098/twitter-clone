@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { GoogleAuthProvider, getAuth, signInWithPopup, signOut } from "firebase/auth";
-import { getFirestore, collection, query, getDocs, orderBy, where, addDoc, onSnapshot, doc, arrayUnion, updateDoc, arrayRemove } from "@firebase/firestore";
+import { getFirestore, collection, query, getDocs, orderBy, where, addDoc, onSnapshot, doc, arrayUnion, updateDoc, arrayRemove, CollectionReference, DocumentData } from "@firebase/firestore";
 // import { getStorage } from "firebase/storage";
 import { IEditProfile, ITweet, IUserDetails } from "./global/interfaces";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -27,6 +27,10 @@ const storage = getStorage();
 // DB's collection
 const usersCollection = collection(db, "users");
 const tweetsCollection = collection(db, "tweets");
+const trendCollections = {
+	hireMe: collection(db, "hireMe"),
+	books: collection(db, "books"),
+};
 
 interface IAPIHandler {
 	getAllTweets: () => Promise<ITweet[]>;
@@ -44,6 +48,7 @@ interface IAPIHandler {
 	uploadProfilePic: (userId: string, imageFile: File) => Promise<string>;
 	uploadWallpaperPic: (userId: string, imageFile: File) => Promise<string>;
 	updateUser: (docId: string, updateObj: IEditProfile) => Promise<void>;
+	getTrendCollection: (trendTopic: any) => Promise<any>;
 }
 
 export const APIHandler: IAPIHandler = {
@@ -185,5 +190,22 @@ export const APIHandler: IAPIHandler = {
 		const uploadedFile = await uploadBytes(wallpaperImageRef, imageFile);
 		const imageURL = await getDownloadURL(uploadedFile.ref);
 		return imageURL;
+	},
+
+	getTrendCollection: async (trendTopic) => {
+		const searchKey: string = trendTopic;
+		const collection: CollectionReference<DocumentData> = trendCollections[searchKey as keyof typeof trendCollections];
+
+		const q = query(collection, orderBy("dateCreated", "desc"));
+		const tweets = await getDocs(q);
+		console.log(tweets, "tweets");
+		const userTweets: ITweet[] = [];
+		tweets.forEach((tweet) => {
+			const tweetData = tweet.data() as ITweet;
+			tweetData.docId = tweet.id;
+			userTweets.push(tweetData);
+		});
+
+		return userTweets;
 	},
 };

@@ -9,3 +9,38 @@
 	font-weight: 900;
 	border-bottom: 1px solid var(--extra-extra-light-gray);
 }
+.sideBar_main {
+	/* background-color: green; */
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	padding: 10px;
+}
+
+.trending_master {
+	background-color: var(--extra-extra-light-gray);
+	border-radius: 3px;
+	padding: 10px;
+}
+.trending_title {
+	font-weight: 800;
+	margin-bottom: 10px;
+}
+.trending_list_main {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+.trending_topic {
+	padding: 10px;
+}
+.trending_topic:hover {
+	cursor: pointer;
+	background-color: var(--extra-light-gray);
+}
+
+.trending_topic_title {
+	font-weight: 600;
+	font-size: 20px;
+	margin-bottom: 5px;
+}

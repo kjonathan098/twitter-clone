@@ -45,7 +45,7 @@ const CreateTweet = () => {
 
 	return (
 		<div className="create_tweet-main">
-			<div>{currentUser && <ProfilePic profilePic={currentUser.profilePic} size={80} openUserProfile={false} />}</div>
+			<div>{currentUser && <ProfilePic profilePic={currentUser.profilePic} size={80} />}</div>
 			<div className="tweet_form-container">
 				<form onSubmit={uploadNewTweet}>
 					<textarea name="" id="tweet_form" placeholder="What's Happening?!" onChange={handleTweetInput}></textarea>

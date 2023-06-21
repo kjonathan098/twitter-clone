@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { ITweet, IUserDetails } from "../../global/interfaces";
 import "./TweetCard.css";
 import { APIHandler } from "../../fireBaseConfig";
@@ -7,6 +7,8 @@ import { FaRegComment, FaRetweet } from "react-icons/fa";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BiBarChart } from "react-icons/bi";
 import { RxShare2 } from "react-icons/rx";
+import { useNavigate } from "react-router-dom";
+import { profileContext } from "../../context/ProfileContext";
 
 interface Iprops {
 	tweet: ITweet;
@@ -17,24 +19,10 @@ const TweetCard = ({ tweet, loading, currentUser }: Iprops) => {
 	const [tweetUserInfo, setTweetUserInfo] = useState<IUserDetails | null>();
 	const [likedByUser, setLikedByUser] = useState<boolean>(false);
 	const [tweetLikes, setTweetLikes] = useState<string[]>([]);
-
-	useEffect(() => {
-		const getTweetUserName = async () => {
-			const tweetAuthorInfo = await APIHandler.getUserByUID(tweet.uid);
-			setTweetUserInfo(tweetAuthorInfo);
-		};
-		getTweetUserName();
-		if (!tweet.likes) return;
-		setTweetLikes([...tweet.likes]);
-
-		const likedByUser = tweet.likes.find((userId) => userId === currentUser.uid);
-		if (likedByUser) return setLikedByUser(true);
-		return;
-	}, [currentUser]);
+	const { fetchNewUser } = useContext(profileContext);
+	const navigate = useNavigate();
 
 	async function handleLike(): Promise<void> {
-		console.log({ tweetLikes }, "tweetLikes");
-
 		// check if tweet is already like then unlike it
 		if (likedByUser) {
 			await APIHandler.unLikeTweet(tweet.docId!, currentUser.uid);
@@ -53,8 +41,26 @@ const TweetCard = ({ tweet, loading, currentUser }: Iprops) => {
 	}
 
 	function openUserProfile() {
-		console.log("open user pforile");
+		const currentUrl = window.location.href;
+		const regex = /.*\/profile.*/;
+		if (regex.test(currentUrl)) return;
+		fetchNewUser(tweetUserInfo!);
+		navigate("/profile");
 	}
+
+	useEffect(() => {
+		const getTweetUserName = async () => {
+			const tweetAuthorInfo = await APIHandler.getUserByUID(tweet.uid);
+			setTweetUserInfo(tweetAuthorInfo);
+		};
+		getTweetUserName();
+		if (!tweet.likes) return;
+		setTweetLikes([...tweet.likes]);
+
+		const likedByUser = tweet.likes.find((userId) => userId === currentUser.uid);
+		if (likedByUser) return setLikedByUser(true);
+		return;
+	}, [currentUser]);
 
 	if (loading) return <>Loading...</>;
 	return (
@@ -62,7 +68,7 @@ const TweetCard = ({ tweet, loading, currentUser }: Iprops) => {
 			{tweetUserInfo && (
 				<div className="tweet_card_container">
 					<div className="tweet_card_top">
-						<ProfilePic profilePic={tweetUserInfo.profilePic} size={70} openUserProfile={false} />
+						<ProfilePic profilePic={tweetUserInfo.profilePic} size={70} openUserProfile={openUserProfile} />
 						<div className="tweet_right">
 							<div className="tweet_right_info">
 								<div className="user_name" onClick={openUserProfile}>

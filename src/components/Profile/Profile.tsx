@@ -18,22 +18,21 @@ const Profile = () => {
 	const [loadingProfile, setLoadingProfile] = useState(false);
 	const [fecthingTweets, setFecthingTweets] = useState(false);
 	const { currentUser, currentUserLikes } = useContext(authContext);
-	const { userProfileInfo, fetchNewUser, userTweets, loading, getUserLikes } = useContext(profileContext);
+	const { userProfileInfo, fetchNewUser, userTweets, loading, getUserLikes, setuserProfileInfo } = useContext(profileContext);
 
-	console.log({ currentUser }, { userProfileInfo });
-
+	// issue 1 we need to setuserProfileInfo when component unMounts
 	useEffect(() => {
 		if (!userProfileInfo) return fetchNewUser(currentUser);
 	}, [userProfileInfo, currentUser]);
 
-	// const fetchUserLikes = async () => {
-	// 	setFecthingTweets(true);
-	// 	const userLikes: ITweet[] | undefined = await getUserLikes();
-	// 	if (!userLikes) return;
-	// 	setLikeTweets(userLikes);
-	// 	setFecthingTweets(false);
-	// 	return;
-	// };
+	const fetchUserLikes = async () => {
+		setFecthingTweets(true);
+		const userLikes: ITweet[] | undefined = await getUserLikes();
+		if (!userLikes) return;
+		setLikeTweets(userLikes);
+		setFecthingTweets(false);
+		return;
+	};
 
 	if (loading || !currentUser || !userProfileInfo) return <>Loading</>;
 	return (
@@ -50,9 +49,9 @@ const Profile = () => {
 							<div className="wallPaper_Container">
 								<img src={userProfileInfo.wallpaperPic || defaultWallpaper} alt="" />
 							</div>
-							{currentUser.uid === userProfileInfo.uid && (
-								<div className="edit_container">
-									<img src={userProfileInfo.profilePic} alt="" className="profile_pic_container" />
+							<div className={`edit_container ${currentUser.uid !== userProfileInfo.uid ? "add_margin" : ""}`}>
+								<img src={userProfileInfo.profilePic} alt="" className="profile_pic_container" />
+								{currentUser.uid === userProfileInfo.uid && (
 									<button
 										onClick={() => {
 											setEditProfile(true);
@@ -60,8 +59,8 @@ const Profile = () => {
 									>
 										Edit profile
 									</button>
-								</div>
-							)}
+								)}
+							</div>
 						</section>
 						<section id="profile_name">
 							<div>{userProfileInfo.name}</div>
@@ -89,7 +88,7 @@ const Profile = () => {
 								className={screenView === 2 ? "active" : undefined}
 								onClick={() => {
 									setScreenView(2);
-									// fetchUserLikes();
+									fetchUserLikes();
 								}}
 							>
 								Likes

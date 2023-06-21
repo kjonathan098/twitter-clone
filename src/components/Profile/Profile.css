@@ -67,6 +67,10 @@
 	padding: 10px;
 	margin-bottom: 5px;
 }
+.edit_container.add_margin {
+	/* background-color: violet; */
+	margin-bottom: 44px;
+}
 
 .profile_pic_container {
 	position: absolute;

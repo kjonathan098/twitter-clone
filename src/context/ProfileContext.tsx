@@ -10,6 +10,7 @@ interface ProfileContextValie {
 	userTweets: ITweet[];
 	loading: boolean;
 	getUserLikes: () => Promise<ITweet[] | undefined>;
+	setuserProfileInfo: React.Dispatch<React.SetStateAction<IUserDetails | null>>;
 }
 
 export const profileContext = createContext<ProfileContextValie>({} as ProfileContextValie);
@@ -53,7 +54,7 @@ const ProfileProvider: React.FC<IProps> = ({ children }) => {
 		return likedTweets;
 	};
 	const test = "test";
-	return <profileContext.Provider value={{ test, userProfileInfo, fetchNewUser, userTweets, loading, getUserLikes }}>{children}</profileContext.Provider>;
+	return <profileContext.Provider value={{ test, userProfileInfo, fetchNewUser, userTweets, loading, getUserLikes, setuserProfileInfo }}>{children}</profileContext.Provider>;
 };
 
 export default ProfileProvider;

@@ -3,8 +3,13 @@
 	display: flex;
 	min-height: 100vh;
 	height: 100%;
+	justify-content: center;
 }
-
+#max_width_container {
+	/* background-color: red; */
+	max-width: 1920px;
+	width: 100%;
+}
 .main_master {
 	/* background-color: green; */
 	flex-grow: 1;

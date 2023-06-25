@@ -38,14 +38,16 @@ function App() {
 			<ProfileProvider>
 				<BrowserRouter>
 					<div id="master_container">
-						<div className="main_master">
-							<NavBar />
-							<Routes>
-								<Route path="/" element={<Home />} />
-								<Route path="/profile" element={<Profile />} />
-								<Route path="/trending" element={<Trending />} />
-							</Routes>
-							<SideMenu />
+						<div id="max_width_container">
+							<div className="main_master">
+								<NavBar />
+								<Routes>
+									<Route path="/" element={<Home />} />
+									<Route path="/profile" element={<Profile />} />
+									<Route path="/trending" element={<Trending />} />
+								</Routes>
+								<SideMenu />
+							</div>
 						</div>
 					</div>
 				</BrowserRouter>

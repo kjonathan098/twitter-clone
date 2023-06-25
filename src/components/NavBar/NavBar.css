@@ -85,6 +85,19 @@ nav {
 .tweet_btn button:hover {
 	cursor: pointer;
 }
+.logout_btn button {
+	background-color: red;
+	color: white;
+	padding: 5px 20px;
+	border-radius: 50px;
+	font-size: 10px;
+	font-weight: 900;
+	border: none;
+}
+
+.logout_btn button:hover {
+	cursor: pointer;
+}
 
 main {
 	/* background-color: green; */

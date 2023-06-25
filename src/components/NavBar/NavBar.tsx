@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "./NavBar.css";
-import { AiFillHome, AiOutlineMail } from "react-icons/ai";
+import { AiFillHome, AiOutlineMail, AiOutlineLogout } from "react-icons/ai";
 import { BiHash } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { IoMdNotificationsOutline } from "react-icons/io";
@@ -63,6 +63,11 @@ const NavBar = () => {
 						</div>
 						<div className="tweet_btn">
 							<button>Tweet</button>
+						</div>
+						<div className="logout_btn">
+							<button>
+								<AiOutlineLogout size={15} />
+							</button>
 						</div>
 					</div>
 				</div>

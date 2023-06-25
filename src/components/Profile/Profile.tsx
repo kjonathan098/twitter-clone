@@ -108,6 +108,7 @@ const Profile = () => {
 								userTweets?.map((tweet) => {
 									return <TweetCard tweet={tweet} loading={false} currentUser={currentUser} />;
 								})}
+
 							{
 								screenView === 2 && (
 									<>

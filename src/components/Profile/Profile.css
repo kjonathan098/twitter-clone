@@ -4,6 +4,7 @@
 	position: relative;
 	/* overflow: scroll; */
 	width: 50%;
+	border-right: 2px solid var(--extra-extra-light-gray);
 }
 #profile_master span {
 	/* background-color: green; */
@@ -154,10 +155,9 @@
 	background-color: var(--extra-light-gray);
 }
 
-#profile_suggestions {
-	/* background-color: green; */
-	overflow: scroll;
-	height: 100%;
-	overflow-y: hidden; /* Hide vertical scrollbar */
-	overflow-x: hidden; /* Hide horizontal scrollbar */
+@media only screen and (max-width: 1024px) {
+	#profile_master {
+		/* background-color: purple; */
+		flex-grow: 1;
+	}
 }

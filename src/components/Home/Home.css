@@ -24,3 +24,9 @@
 	font-weight: 900;
 	border-bottom: 2px solid var(--extra-extra-light-gray);
 }
+@media only screen and (max-width: 1024px) {
+	#home_master {
+		/* background-color: purple; */
+		flex-grow: 1;
+	}
+}

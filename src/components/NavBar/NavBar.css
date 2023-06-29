@@ -115,13 +115,12 @@ main {
 @media screen and (max-width: 768px) {
 	nav {
 		width: fit-content;
-		background-color: yellow;
+		background-color: white;
 	}
 	.navBar_master {
 		flex-direction: row;
 	}
 	.nav_container {
-		background-color: blueviolet;
 		width: 100%;
 	}
 	.link_title {
@@ -151,5 +150,14 @@ main {
 	}
 	nav.display.active {
 		width: 100px;
+	}
+	.nav_menu {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 5px;
+	}
+	.link_container {
+		padding: 0px;
 	}
 }

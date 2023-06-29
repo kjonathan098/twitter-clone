@@ -6,6 +6,7 @@ import { CgProfile } from "react-icons/cg";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { BsBookmark } from "react-icons/bs";
 import { CiViewList, CiCircleMore } from "react-icons/ci";
+
 import logo from "../../media/twitter_logo.png";
 import { APIHandler } from "../../fireBaseConfig";
 

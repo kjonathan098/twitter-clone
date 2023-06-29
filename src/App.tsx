@@ -11,6 +11,7 @@ import NavBar from "./components/NavBar/NavBar";
 import SideMenu from "./components/SideMenu/SideMenu";
 import Trending from "./components/Trending/Trending";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { AiOutlineClose } from "react-icons/ai";
 
 function App() {
 	const [loading, setLoading] = useState(true);
@@ -42,12 +43,22 @@ function App() {
 						<div id="max_width_container">
 							<div className="main_master">
 								{/* TODO : MAKE SURE HAMBURGER MENU STAY AT TOP AND SCROLL DOWN */}
-								<GiHamburgerMenu
-									className="menu_button"
-									onClick={() => {
-										setDisplayNav(!displayNav);
-									}}
-								/>
+								{displayNav ? (
+									<AiOutlineClose
+										className="menu_button"
+										onClick={() => {
+											setDisplayNav(!displayNav);
+										}}
+									/>
+								) : (
+									<GiHamburgerMenu
+										className="menu_button"
+										onClick={() => {
+											setDisplayNav(!displayNav);
+										}}
+									/>
+								)}
+
 								<NavBar displayNav={displayNav} />
 								<Routes>
 									<Route path="/" element={<Home />} />

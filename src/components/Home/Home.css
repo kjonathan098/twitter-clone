@@ -33,3 +33,8 @@
 		border-right: none;
 	}
 }
+@media only screen and (max-width: 425px) {
+	.page_title {
+		padding-left: 40px;
+	}
+}

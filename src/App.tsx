@@ -41,6 +41,7 @@ function App() {
 					<div id="master_container">
 						<div id="max_width_container">
 							<div className="main_master">
+								{/* TODO : MAKE SURE HAMBURGER MENU STAY AT TOP AND SCROLL DOWN */}
 								<GiHamburgerMenu
 									className="menu_button"
 									onClick={() => {

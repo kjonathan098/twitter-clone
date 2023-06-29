@@ -114,9 +114,13 @@
 	}
 }
 @media screen and (max-width: 480px) {
+	#login_master {
+		flex-direction: column-reverse;
+	}
 	#login_master > section:first-child {
-		/* background-color: red; */
-		display: none;
+		background-color: red;
+		height: 300px;
+		width: 100%;
 	}
 	/* .auth_master {
 		height: 100vh;

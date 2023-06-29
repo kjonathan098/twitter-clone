@@ -16,6 +16,7 @@ interface IProps {
 const NavBar = ({ displayNav }: IProps) => {
 	return (
 		<nav className={displayNav ? `display ${displayNav ? "active" : ""}` : ""}>
+			{/* TODO : ADD A CLOSE ICON FOR MOBILE FRIENDLY, ADD TRANSITION*/}
 			<div className="navBar_master">
 				<div className="nav_container">
 					<div className="nav_container_top">

@@ -14,7 +14,7 @@
 .feed_main {
 	/* background-color: red; */
 	flex-grow: 1;
-	border-right: 2px solid var(--extra-extra-light-gray);
+	/* border-right: 2px solid var(--extra-extra-light-gray); */
 }
 
 .page_title {
@@ -28,5 +28,6 @@
 	#home_master {
 		/* background-color: purple; */
 		flex-grow: 1;
+		border-right: none;
 	}
 }

@@ -9,9 +9,13 @@ import { CiViewList, CiCircleMore } from "react-icons/ci";
 import logo from "../../media/twitter_logo.png";
 import { APIHandler } from "../../fireBaseConfig";
 
-const NavBar = () => {
+interface IProps {
+	displayNav: boolean;
+}
+
+const NavBar = ({ displayNav }: IProps) => {
 	return (
-		<nav>
+		<nav className={displayNav ? `display ${displayNav ? "active" : ""}` : ""}>
 			<div className="navBar_master">
 				<div className="nav_container">
 					<div className="nav_container_top">

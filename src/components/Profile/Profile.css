@@ -5,6 +5,8 @@
 	/* overflow: scroll; */
 	width: 50%;
 	border-right: 2px solid var(--extra-extra-light-gray);
+	overflow: scroll;
+	max-height: 100vh;
 }
 #profile_master span {
 	/* background-color: green; */

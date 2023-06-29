@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import { auth } from "./fireBaseConfig";
-
 import Home from "./components/Home/Home";
 import AuthProvider, { authContext } from "./context/AuthContext";
 import Profile from "./components/Profile/Profile";
@@ -11,10 +10,12 @@ import Auth from "./components/Auth/Auth";
 import NavBar from "./components/NavBar/NavBar";
 import SideMenu from "./components/SideMenu/SideMenu";
 import Trending from "./components/Trending/Trending";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 function App() {
 	const [loading, setLoading] = useState(true);
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const [displayNav, setDisplayNav] = useState(false);
 
 	useEffect(() => {
 		const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -40,7 +41,13 @@ function App() {
 					<div id="master_container">
 						<div id="max_width_container">
 							<div className="main_master">
-								<NavBar />
+								<GiHamburgerMenu
+									className="menu_button"
+									onClick={() => {
+										setDisplayNav(!displayNav);
+									}}
+								/>
+								<NavBar displayNav={displayNav} />
 								<Routes>
 									<Route path="/" element={<Home />} />
 									<Route path="/profile" element={<Profile />} />

@@ -137,4 +137,19 @@ main {
 	.link_title {
 		display: none;
 	}
+	nav {
+		display: none;
+		width: 0;
+	}
+	nav.display {
+		width: 0px;
+		display: block;
+		position: absolute;
+		z-index: 1;
+		height: 100vh;
+		transition: width 0.3s ease;
+	}
+	nav.display.active {
+		width: 100px;
+	}
 }

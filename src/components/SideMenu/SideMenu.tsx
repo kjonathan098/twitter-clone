@@ -28,13 +28,6 @@ const SideMenu = () => {
 					})}
 				</div>
 			</div>
-			<button
-				onClick={() => {
-					APIHandler.logout();
-				}}
-			>
-				Logout
-			</button>
 		</div>
 	);
 };

@@ -73,13 +73,16 @@ nav {
 }
 
 .tweet_btn button {
-	background-color: var(--main-blue);
+	background-color: red;
 	color: white;
-	padding: 20px 70px;
+	padding: 10px 20px;
 	border-radius: 50px;
 	font-size: 1rem;
 	font-weight: 900;
 	border: none;
+	display: flex;
+	gap: 5px;
+	align-items: center;
 }
 
 .tweet_btn button:hover {
@@ -124,8 +127,9 @@ main {
 	.link_title {
 		display: none;
 	}
-	.tweet_btn button {
+	.tweet_btn button p {
 		display: none;
+		padding: 3px 10px;
 	}
 }
 

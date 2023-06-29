@@ -7,6 +7,7 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 import { BsBookmark } from "react-icons/bs";
 import { CiViewList, CiCircleMore } from "react-icons/ci";
 import logo from "../../media/twitter_logo.png";
+import { APIHandler } from "../../fireBaseConfig";
 
 const NavBar = () => {
 	return (
@@ -62,10 +63,12 @@ const NavBar = () => {
 							</div>
 						</div>
 						<div className="tweet_btn">
-							<button>Tweet</button>
-						</div>
-						<div className="logout_btn">
-							<button>
+							<button
+								onClick={() => {
+									APIHandler.logout();
+								}}
+							>
+								<p>Logout</p>
 								<AiOutlineLogout size={15} />
 							</button>
 						</div>

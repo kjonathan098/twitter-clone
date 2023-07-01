@@ -6,14 +6,13 @@ import { IEditProfile, ITweet, IUserDetails } from "./global/interfaces";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const firebaseConfig = {
-	apiKey: "AIzaSyDYkXf-2DATnNEORirDibeTdSmaCJUjRGY",
-	authDomain: "microblog-581cc.firebaseapp.com",
-	projectId: "microblog-581cc",
-	storageBucket: "microblog-581cc.appspot.com",
-	messagingSenderId: "867567000225",
-	appId: "1:867567000225:web:79a8d4fe6435761bbc6ee0",
+	apiKey: process.env.REACT_APP_API_KEY,
+	authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+	projectId: process.env.REACT_APP_PROJECT_ID,
+	storageBucket: process.env.REACT_APP_STORAGE_BUKET,
+	messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+	appId: process.env.REACT_APP_APP_ID,
 };
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
@@ -53,10 +52,16 @@ interface IAPIHandler {
 
 export const APIHandler: IAPIHandler = {
 	googleAuth: async (): Promise<any> => {
-		const provider = new GoogleAuthProvider();
-		const results = await signInWithPopup(auth, provider);
-		const userDetails: IUserDetails = { name: results.user.displayName, email: results.user.email, profilePic: results.user.photoURL || "J", wallpaperPic: null, uid: results.user.uid };
-		return userDetails;
+		try {
+			const provider = new GoogleAuthProvider();
+
+			const results = await signInWithPopup(auth, provider);
+
+			const userDetails: IUserDetails = { name: results.user.displayName, email: results.user.email, profilePic: results.user.photoURL || "J", wallpaperPic: null, uid: results.user.uid };
+			return userDetails;
+		} catch (error) {
+			console.log(error, "firebase!");
+		}
 	},
 
 	logout: async () => {

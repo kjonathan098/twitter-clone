@@ -1,0 +1,17 @@
+.register_inputs_container {
+	/* background-color: aqua; */
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	margin-bottom: 10px;
+}
+.register_inputs_container input {
+	border-radius: 5px;
+	height: 42px;
+	width: 350px;
+	border-color: #000;
+	padding-left: 20px;
+}
+.register_btn {
+	background-color: #546684;
+}

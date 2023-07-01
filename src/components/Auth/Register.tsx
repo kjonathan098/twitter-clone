@@ -1,11 +1,84 @@
+import { APIHandler } from "../../fireBaseConfig";
 import "./Register.css";
-import { SetStateAction, Dispatch } from "react";
+import { SetStateAction, Dispatch, useState } from "react";
 
 interface IProps {
 	setRegister: Dispatch<SetStateAction<boolean>>;
 }
 const Register = ({ setRegister }: IProps) => {
-	return <div>Register</div>;
+	const [userName, setUserName] = useState("");
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [rePassword, setRePassword] = useState("");
+
+	function handleRegsitration() {
+		if (!userName || !email || !password || !rePassword) return alert("please fill form");
+		if (password !== rePassword) return alert("passwords mismatch");
+		
+	}
+
+	return (
+		<>
+			<div>Good to have you here</div>
+			<div>Create your account</div>
+			<div className="register_inputs_container">
+				<input
+					type="text"
+					placeholder="Enter Name"
+					name="email"
+					onChange={(e) => {
+						setUserName(e.target.value);
+					}}
+				/>
+				<input
+					type="text"
+					placeholder="Enter Email"
+					name="email"
+					onChange={(e) => {
+						setEmail(e.target.value);
+					}}
+				/>
+				<input
+					type="password"
+					placeholder="Enter Password"
+					name="email"
+					onChange={(e) => {
+						setPassword(e.target.value);
+					}}
+				/>
+				<input
+					type="password"
+					placeholder="Re-Password"
+					name="email"
+					onChange={(e) => {
+						setRePassword(e.target.value);
+					}}
+				/>
+			</div>
+			<button className="register_btn authBtn" onClick={handleRegsitration}>
+				Register
+			</button>
+			<button
+				className="login_google_btn authBtn"
+				onClick={() => {
+					APIHandler.googleAuth();
+				}}
+			>
+				Register with Google
+			</button>
+			<button className="login_demo_btn authBtn">Click here to use our Demo account</button>
+			<div>
+				Already have an account?{" "}
+				<span
+					onClick={() => {
+						setRegister(false);
+					}}
+				>
+					Login here
+				</span>
+			</div>
+		</>
+	);
 };
 
 export default Register;

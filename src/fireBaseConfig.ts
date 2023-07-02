@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { GoogleAuthProvider, getAuth, signInWithPopup, signOut } from "firebase/auth";
+import { GoogleAuthProvider, getAuth, signInWithPopup, signOut, signInWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, collection, query, getDocs, orderBy, where, addDoc, onSnapshot, doc, arrayUnion, updateDoc, arrayRemove, CollectionReference, DocumentData } from "@firebase/firestore";
 // import { getStorage } from "firebase/storage";
 import { IEditProfile, ITweet, IUserDetails } from "./global/interfaces";
@@ -48,20 +48,22 @@ interface IAPIHandler {
 	uploadWallpaperPic: (userId: string, imageFile: File) => Promise<string>;
 	updateUser: (docId: string, updateObj: IEditProfile) => Promise<void>;
 	getTrendCollection: (trendTopic: any) => Promise<any>;
+	loginWDemo: () => Promise<any>;
 }
 
 export const APIHandler: IAPIHandler = {
 	googleAuth: async (): Promise<any> => {
-		try {
-			const provider = new GoogleAuthProvider();
+		const provider = new GoogleAuthProvider();
+		const results = await signInWithPopup(auth, provider);
+		const userDetails: IUserDetails = { name: results.user.displayName, email: results.user.email, profilePic: results.user.photoURL || "J", wallpaperPic: null, uid: results.user.uid };
+		return userDetails;
+	},
+	loginWDemo: async () => {
+		const email = process.env.REACT_APP_DEMO_EMAIL;
+		const password = process.env.REACT_APP_DEMO_PASS;
 
-			const results = await signInWithPopup(auth, provider);
-
-			const userDetails: IUserDetails = { name: results.user.displayName, email: results.user.email, profilePic: results.user.photoURL || "J", wallpaperPic: null, uid: results.user.uid };
-			return userDetails;
-		} catch (error) {
-			console.log(error, "firebase!");
-		}
+		const userCredential = await signInWithEmailAndPassword(auth, email!, password!);
+		console.log({ userCredential });
 	},
 
 	logout: async () => {

@@ -14,7 +14,6 @@ const Register = ({ setRegister }: IProps) => {
 	function handleRegsitration() {
 		if (!userName || !email || !password || !rePassword) return alert("please fill form");
 		if (password !== rePassword) return alert("passwords mismatch");
-		
 	}
 
 	return (
@@ -66,7 +65,14 @@ const Register = ({ setRegister }: IProps) => {
 			>
 				Register with Google
 			</button>
-			<button className="login_demo_btn authBtn">Click here to use our Demo account</button>
+			<button
+				className="login_demo_btn authBtn"
+				onClick={() => {
+					APIHandler.loginWDemo();
+				}}
+			>
+				Click here to use our Demo account
+			</button>
 			<div>
 				Already have an account?{" "}
 				<span

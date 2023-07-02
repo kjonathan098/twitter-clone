@@ -131,10 +131,6 @@
 	.authBtn {
 		width: 294px;
 	}
-	.register_inputs_container input {
-		background-color: red;
-		width: 271px;
-	}
 }
 
 @media screen and (max-width: 320px) {

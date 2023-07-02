@@ -125,7 +125,18 @@
 	/* .auth_master {
 		height: 100vh;
 	} */
+	.login_inputs_container input {
+		width: 271px;
+	}
+	.authBtn {
+		width: 294px;
+	}
+	.register_inputs_container input {
+		background-color: red;
+		width: 271px;
+	}
 }
+
 @media screen and (max-width: 320px) {
 	#feed_master {
 		/* background-color: green; */

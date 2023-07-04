@@ -9,6 +9,7 @@ import { BiBarChart } from "react-icons/bi";
 import { RxShare2 } from "react-icons/rx";
 import { useNavigate } from "react-router-dom";
 import { profileContext } from "../../context/ProfileContext";
+import profileDefault from "../../media/fake_logo.png";
 
 interface Iprops {
 	tweet: ITweet;
@@ -69,7 +70,7 @@ const TweetCard = ({ tweet, loading, currentUser }: Iprops) => {
 			{tweetUserInfo && (
 				<div className="tweet_card_container">
 					<div className="tweet_card_top">
-						<ProfilePic profilePic={tweetUserInfo.profilePic} size={70} openUserProfile={openUserProfile} />
+						<ProfilePic profilePic={tweetUserInfo.profilePic || profileDefault} size={70} openUserProfile={openUserProfile} />
 						<div className="tweet_right">
 							<div className="tweet_right_info">
 								<div className="user_name" onClick={openUserProfile}>

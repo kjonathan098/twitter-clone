@@ -6,6 +6,7 @@ import { AiOutlinePicture, AiFillCloseCircle } from "react-icons/ai";
 import useNewTweet from "../../customHooks/useNewTweet";
 import { APIHandler } from "../../fireBaseConfig";
 import { ITweet } from "../../global/interfaces";
+import profileDefault from "../../media/fake_logo.png";
 
 const CreateTweet = () => {
 	const [tweet, setTweet] = useState<string>("");
@@ -45,7 +46,7 @@ const CreateTweet = () => {
 
 	return (
 		<div className="create_tweet-main">
-			<div>{currentUser && <ProfilePic profilePic={currentUser.profilePic} size={80} />}</div>
+			<div>{currentUser && <ProfilePic profilePic={currentUser.profilePic || profileDefault} size={80} />}</div>
 			<div className="tweet_form-container">
 				<form onSubmit={uploadNewTweet}>
 					<textarea name="" id="tweet_form" placeholder="What's Happening?!" onChange={handleTweetInput}></textarea>

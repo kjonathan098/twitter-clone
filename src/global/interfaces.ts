@@ -14,7 +14,7 @@ export interface IUserDetails {
 	readonly userDocumentId?: string;
 	name: string | null;
 	email: string | null;
-	profilePic: string;
+	profilePic: string | null;
 	wallpaperPic: string | null;
 }
 export interface IEditProfile {

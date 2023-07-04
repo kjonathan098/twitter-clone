@@ -1,6 +1,8 @@
+import { authContext } from "../../context/AuthContext";
 import { APIHandler } from "../../fireBaseConfig";
+import { IUserDetails } from "../../global/interfaces";
 import "./Register.css";
-import { SetStateAction, Dispatch, useState } from "react";
+import { SetStateAction, Dispatch, useState, useContext } from "react";
 
 interface IProps {
 	setRegister: Dispatch<SetStateAction<boolean>>;
@@ -10,10 +12,22 @@ const Register = ({ setRegister }: IProps) => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [rePassword, setRePassword] = useState("");
+	const { manageCurrentUser } = useContext(authContext);
 
-	function handleRegsitration() {
+	async function handleRegsitration() {
 		if (!userName || !email || !password || !rePassword) return alert("please fill form");
 		if (password !== rePassword) return alert("passwords mismatch");
+		const res = await APIHandler.registerWEmail(email, password);
+		if (!res) return;
+		const userObj: IUserDetails = {
+			uid: res.uid,
+			joinedDate: res.user.metadata.creationTime,
+			name: userName,
+			email: email,
+			profilePic: res.photoURL,
+			wallpaperPic: null,
+		};
+		//TODO FIX ISSUE
 	}
 
 	return (

@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { GoogleAuthProvider, getAuth, signInWithPopup, signOut, signInWithEmailAndPassword } from "firebase/auth";
+import { GoogleAuthProvider, getAuth, signInWithPopup, signOut, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, collection, query, getDocs, orderBy, where, addDoc, onSnapshot, doc, arrayUnion, updateDoc, arrayRemove, CollectionReference, DocumentData } from "@firebase/firestore";
 // import { getStorage } from "firebase/storage";
 import { IEditProfile, ITweet, IUserDetails } from "./global/interfaces";
@@ -49,6 +49,7 @@ interface IAPIHandler {
 	updateUser: (docId: string, updateObj: IEditProfile) => Promise<void>;
 	getTrendCollection: (trendTopic: any) => Promise<any>;
 	loginWDemo: () => Promise<any>;
+	registerWEmail: (email: string, password: string) => Promise<any>;
 }
 
 export const APIHandler: IAPIHandler = {
@@ -58,12 +59,19 @@ export const APIHandler: IAPIHandler = {
 		const userDetails: IUserDetails = { name: results.user.displayName, email: results.user.email, profilePic: results.user.photoURL || "J", wallpaperPic: null, uid: results.user.uid };
 		return userDetails;
 	},
+	registerWEmail: async (email, password) => {
+		try {
+			const res = await createUserWithEmailAndPassword(auth, email, password);
+
+			return res;
+		} catch (error) {
+			return false;
+		}
+	},
 	loginWDemo: async () => {
 		const email = process.env.REACT_APP_DEMO_EMAIL;
 		const password = process.env.REACT_APP_DEMO_PASS;
-
-		const userCredential = await signInWithEmailAndPassword(auth, email!, password!);
-		console.log({ userCredential });
+		await signInWithEmailAndPassword(auth, email!, password!);
 	},
 
 	logout: async () => {

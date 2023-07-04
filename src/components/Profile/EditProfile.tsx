@@ -5,6 +5,8 @@ import defaultWallpaper from "../../media/default_wallpaper.jpg";
 import "./EditProfile.css";
 import { APIHandler } from "../../fireBaseConfig";
 import { IEditProfile } from "../../global/interfaces";
+import profileDefault from "../../media/fake_logo.png";
+
 interface IProps {
 	editProfile: boolean;
 	setEditProfile: React.Dispatch<React.SetStateAction<boolean>>;
@@ -90,7 +92,7 @@ const EditProfile = ({ editProfile, setEditProfile }: IProps) => {
 						profilePicFileRef!.current!.click();
 					}}
 				>
-					<img src={profilePicPreview || currentUser.profilePic} alt="" className="edit_profile_pic" />
+					<img src={profilePicPreview || currentUser.profilePic || profileDefault} alt="" className="edit_profile_pic" />
 					<MdAddAPhoto className="edit_photo_icon" />
 					<input type="file" ref={profilePicFileRef} style={{ display: "none" }} onChange={handleProfilePicChange} />
 				</div>

@@ -8,6 +8,7 @@ import EditProfile from "./EditProfile";
 import { APIHandler } from "../../fireBaseConfig";
 import { profileContext } from "../../context/ProfileContext";
 import { ITweet } from "../../global/interfaces";
+import defaultPic from "../../media/fake_logo.png";
 import NavBar from "../NavBar/NavBar";
 import SideMenu from "../SideMenu/SideMenu";
 
@@ -50,7 +51,7 @@ const Profile = () => {
 								<img src={userProfileInfo.wallpaperPic || defaultWallpaper} alt="" />
 							</div>
 							<div className={`edit_container ${currentUser.uid !== userProfileInfo.uid ? "add_margin" : ""}`}>
-								<img src={userProfileInfo.profilePic} alt="" className="profile_pic_container" />
+								<img src={userProfileInfo.profilePic || defaultPic} alt="" className="profile_pic_container" />
 								{currentUser.uid === userProfileInfo.uid && (
 									<button
 										onClick={() => {
@@ -67,7 +68,7 @@ const Profile = () => {
 							<div>{`@${userProfileInfo.name}`}</div>
 							<div>
 								<MdCalendarMonth />
-								<div>{new Date(Number(userProfileInfo.joinedDate)).toLocaleDateString()}</div>
+								<div>{userProfileInfo.joinedDate}</div>
 							</div>
 							<div>
 								<div>1 following</div>

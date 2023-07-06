@@ -12,6 +12,7 @@ import SideMenu from "./components/SideMenu/SideMenu";
 import Trending from "./components/Trending/Trending";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
+import DisplayNavProvider from "./context/DisplayNavContext";
 
 function App() {
 	const [loading, setLoading] = useState(true);
@@ -38,38 +39,24 @@ function App() {
 	return (
 		<AuthProvider>
 			<ProfileProvider>
-				<BrowserRouter>
-					<div id="master_container">
-						<div id="max_width_container">
-							<div className="main_master">
-								{/* TODO : MAKE SURE HAMBURGER MENU STAY AT TOP AND SCROLL DOWN */}
-								{displayNav ? (
-									<AiOutlineClose
-										className="menu_button"
-										onClick={() => {
-											setDisplayNav(!displayNav);
-										}}
-									/>
-								) : (
-									<GiHamburgerMenu
-										className="menu_button"
-										onClick={() => {
-											setDisplayNav(!displayNav);
-										}}
-									/>
-								)}
-
-								<NavBar displayNav={displayNav} />
-								<Routes>
-									<Route path="/" element={<Home />} />
-									<Route path="/profile" element={<Profile />} />
-									<Route path="/trending" element={<Trending />} />
-								</Routes>
-								<SideMenu />
+				<DisplayNavProvider>
+					<BrowserRouter>
+						<div id="master_container">
+							<div id="max_width_container">
+								<div className="main_master">
+									{/* TODO : MAKE SURE HAMBURGER MENU STAY AT TOP AND SCROLL DOWN */}
+									<NavBar displayNav={displayNav} />
+									<Routes>
+										<Route path="/" element={<Home />} />
+										<Route path="/profile" element={<Profile />} />
+										<Route path="/trending" element={<Trending />} />
+									</Routes>
+									<SideMenu />
+								</div>
 							</div>
 						</div>
-					</div>
-				</BrowserRouter>
+					</BrowserRouter>
+				</DisplayNavProvider>
 			</ProfileProvider>
 		</AuthProvider>
 	);

@@ -15,9 +15,7 @@
 	flex-grow: 1;
 	display: flex;
 }
-.menu_button {
-	display: none;
-}
+
 @media only screen and (max-width: 1024px) {
 	body {
 		/* background-color: green; */
@@ -34,13 +32,6 @@
 	}
 	.main_master {
 		position: relative;
-	}
-	.menu_button {
-		display: block;
-		position: absolute;
-		z-index: 2;
-		top: 20px;
-		right: 25px;
 	}
 }
 @media only screen and (max-width: 375px) {

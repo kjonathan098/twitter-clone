@@ -36,6 +36,8 @@
 	/* background-color: green; */
 	padding: 5px;
 	color: black;
+	display: flex;
+	justify-content: space-between;
 }
 
 .profile_user_name {
@@ -48,7 +50,10 @@
 	font-size: 15px;
 	color: var(--light-gray);
 }
-
+.mobile_nav_profile-container {
+	background-color: green;
+	width: fit-content;
+}
 #profile_pics {
 	/* background-color: green; */
 }

@@ -11,6 +11,7 @@ import { ITweet } from "../../global/interfaces";
 import defaultPic from "../../media/fake_logo.png";
 import NavBar from "../NavBar/NavBar";
 import SideMenu from "../SideMenu/SideMenu";
+import MobileNavBar from "../NavBar/MobileNavBar";
 
 const Profile = () => {
 	const [screenView, setScreenView] = useState(1);
@@ -35,6 +36,8 @@ const Profile = () => {
 		return;
 	};
 
+	//TODO: FIX USERPROFILENAME
+
 	if (loading || !currentUser || !userProfileInfo) return <>Loading</>;
 	return (
 		<div id="profile_master">
@@ -42,8 +45,11 @@ const Profile = () => {
 				<div className="main_profile_container">
 					<div>
 						<section id="profile_header">
-							<div className="profile_user_name">{userProfileInfo.name}</div>
-							<div className="user_tweets_length">{`${userTweets?.length} tweets`}</div>
+							<div>
+								<div className="profile_user_name">{userProfileInfo.name}</div>
+								<div className="user_tweets_length">{`${userTweets?.length} tweets`}</div>
+							</div>
+							<MobileNavBar />
 						</section>
 
 						<section id="profile_pics">

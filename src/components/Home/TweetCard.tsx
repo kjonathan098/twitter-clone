@@ -66,7 +66,7 @@ const TweetCard = ({ tweet, loading, currentUser }: Iprops) => {
 
 	if (loading) return <>Loading...</>;
 	return (
-		<React.Fragment key={tweet.tweet}>
+		<React.Fragment key={tweet.docId!}>
 			{tweetUserInfo && (
 				<div className="tweet_card_container">
 					<div className="tweet_card_top">

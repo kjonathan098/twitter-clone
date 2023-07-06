@@ -25,7 +25,11 @@
 	font-size: 30px;
 	font-weight: 900;
 	border-bottom: 2px solid var(--extra-extra-light-gray);
+	position: relative;
+	display: flex;
+	justify-content: space-between;
 }
+
 @media only screen and (max-width: 1024px) {
 	#home_master {
 		/* background-color: purple; */

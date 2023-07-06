@@ -1,0 +1,11 @@
+.menu_button_container {
+	background-color: red;
+	width: fit-content;
+	display: none;
+}
+@media only screen and (max-width: 425px) {
+	.menu_button_container {
+		/* background-color: green; */
+		display: block;
+	}
+}

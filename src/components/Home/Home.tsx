@@ -8,18 +8,18 @@ import { ITweet } from "../../global/interfaces";
 import Auth from "../Auth/Auth";
 import { authContext } from "../../context/AuthContext";
 import TweetCard from "./TweetCard";
-
+import MobileNavBar from "../NavBar/MobileNavBar";
+import { AiOutlineClose } from "react-icons/ai";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { displayNavContext } from "../../context/DisplayNavContext";
 interface IProps {}
 
 const Home = () => {
 	const [tweets, setTweets] = useState<ITweet[]>([]);
 	const [loading, setLoading] = useState(false);
+
 	const { isLoggedIn, currentUser } = useContext(authContext);
 
-	async function getTweets(): Promise<void> {
-		const tweets: ITweet[] = await APIHandler.getAllTweets();
-		setTweets(tweets);
-	}
 	useEffect(() => {
 		setLoading(true);
 		APIHandler.liveTweets(setTweets);
@@ -32,12 +32,15 @@ const Home = () => {
 		<div id="home_master">
 			<div id="feed_master">
 				<div className="feed_main">
-					<div className="page_title">Home</div>
+					<div className="page_title">
+						<div>Home</div>
+						<MobileNavBar />
+					</div>
 					<div>
 						<CreateTweet />
 						<div>
 							{tweets?.map((tweet: ITweet) => {
-								return <TweetCard tweet={tweet} loading={loading} currentUser={currentUser!} />;
+								return <TweetCard key={tweet.docId} tweet={tweet} loading={loading} currentUser={currentUser!} />;
 							})}
 						</div>
 					</div>

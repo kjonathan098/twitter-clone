@@ -20,6 +20,7 @@ const SideMenu = () => {
 								onClick={() => {
 									navigate("/trending", { state: { trend: trend.url } });
 								}}
+								key={trend.name}
 							>
 								<p className="trending_topic_title">{trend.name}</p>
 								<p>{trend.length} tweets</p>

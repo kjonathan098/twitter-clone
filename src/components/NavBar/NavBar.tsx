@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "./NavBar.css";
-import { AiFillHome, AiOutlineMail, AiOutlineLogout } from "react-icons/ai";
+import { AiFillHome, AiOutlineMail, AiOutlineLogout, AiOutlineClose } from "react-icons/ai";
 import { BiHash } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { IoMdNotificationsOutline } from "react-icons/io";
@@ -9,16 +9,28 @@ import { CiViewList, CiCircleMore } from "react-icons/ci";
 
 import logo from "../../media/twitter_logo.png";
 import { APIHandler } from "../../fireBaseConfig";
+import { useContext } from "react";
+import { displayNavContext } from "../../context/DisplayNavContext";
 
 interface IProps {
 	displayNav: boolean;
 }
 
-const NavBar = ({ displayNav }: IProps) => {
+const NavBar = ({}: IProps) => {
+	const { test, displayNav, setDisplayNav } = useContext(displayNavContext);
+
 	return (
 		<nav className={displayNav ? `display ${displayNav ? "active" : ""}` : ""}>
 			{/* TODO : ADD A CLOSE ICON FOR MOBILE FRIENDLY, ADD TRANSITION*/}
 			<div className="navBar_master">
+				<div className="close_btn_container">
+					<AiOutlineClose
+						className="close_btn"
+						onClick={() => {
+							setDisplayNav(!displayNav);
+						}}
+					/>
+				</div>
 				<div className="nav_container">
 					<div className="nav_container_top">
 						<div className="nav_top_logo">

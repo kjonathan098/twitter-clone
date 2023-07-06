@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
-import { auth } from "./fireBaseConfig";
+import { APIHandler, auth } from "./fireBaseConfig";
 import Home from "./components/Home/Home";
 import AuthProvider, { authContext } from "./context/AuthContext";
 import Profile from "./components/Profile/Profile";
@@ -13,17 +13,28 @@ import Trending from "./components/Trending/Trending";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
 import DisplayNavProvider from "./context/DisplayNavContext";
+import { ITweet, IUserDetails } from "./global/interfaces";
 
 function App() {
 	const [loading, setLoading] = useState(true);
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [displayNav, setDisplayNav] = useState(false);
+	const [currentUser, setCurrentUser] = useState<IUserDetails | null>(null);
+	const [currentUserLikes, setcurrentUserLikes] = useState<ITweet[]>([]);
+
+	const test = "test";
+
+	const fetchCurrentUser = async (user: any) => {
+		const userExist: IUserDetails | null = await APIHandler.getUserByUID(user.uid);
+		setCurrentUser(userExist);
+		setIsLoggedIn(true);
+	};
 
 	useEffect(() => {
 		const unsubscribe = auth.onAuthStateChanged((user) => {
 			setLoading(true);
 			if (user) {
-				setIsLoggedIn(true);
+				fetchCurrentUser(user);
 			} else {
 				setIsLoggedIn(false);
 			}
@@ -37,7 +48,7 @@ function App() {
 	if (loading) return <>loading...</>;
 	if (!isLoggedIn) return <Auth />;
 	return (
-		<AuthProvider>
+		<authContext.Provider value={{ test, loading, isLoggedIn, currentUser, currentUserLikes, setCurrentUser }}>
 			<ProfileProvider>
 				<DisplayNavProvider>
 					<BrowserRouter>
@@ -58,7 +69,7 @@ function App() {
 					</BrowserRouter>
 				</DisplayNavProvider>
 			</ProfileProvider>
-		</AuthProvider>
+		</authContext.Provider>
 	);
 }
 

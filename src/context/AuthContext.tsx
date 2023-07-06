@@ -9,7 +9,6 @@ interface AuthContextValue {
 	currentUser: IUserDetails | null;
 	currentUserLikes: ITweet[];
 	setCurrentUser: React.Dispatch<React.SetStateAction<IUserDetails | null>>;
-	manageCurrentUser: (userDetails: IUserDetails) => Promise<any>;
 }
 export const authContext = createContext<AuthContextValue>({} as AuthContextValue);
 
@@ -66,7 +65,7 @@ const AuthProvider: React.FC<IProps> = ({ children }) => {
 		};
 	}, []);
 
-	return <authContext.Provider value={{ test, loading, isLoggedIn, currentUser, currentUserLikes, setCurrentUser, manageCurrentUser }}>{children}</authContext.Provider>;
+	return <authContext.Provider value={{ test, loading, isLoggedIn, currentUser, currentUserLikes, setCurrentUser }}>{children}</authContext.Provider>;
 };
 
 export default AuthProvider;

@@ -12,7 +12,6 @@ const Register = ({ setRegister }: IProps) => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [rePassword, setRePassword] = useState("");
-	const { manageCurrentUser } = useContext(authContext);
 
 	async function handleRegsitration() {
 		if (!userName || !email || !password || !rePassword) return alert("please fill form");

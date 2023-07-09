@@ -8,6 +8,11 @@ const Login = ({ setRegister }: IProps) => {
 	const [userName, setUserName] = useState<string | null>();
 	const [password, setPassword] = useState<string | null>();
 
+	async function handleLogin() {
+		if (!userName || !password) return alert("Please enter email and password");
+		const res = await APIHandler.loginWEmailandPassword(userName, password);
+	}
+
 	return (
 		<>
 			<div>Welcome Back</div>
@@ -31,9 +36,9 @@ const Login = ({ setRegister }: IProps) => {
 				/>
 			</div>
 
-			{/* <button className="login_btn authBtn" onClick={handleLogin}>
+			<button className="login_btn authBtn" onClick={handleLogin}>
 				Login
-			</button> */}
+			</button>
 			<button
 				className="login_google_btn authBtn"
 				onClick={() => {

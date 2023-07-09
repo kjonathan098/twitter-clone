@@ -50,6 +50,7 @@ interface IAPIHandler {
 	getTrendCollection: (trendTopic: any) => Promise<any>;
 	loginWDemo: () => Promise<any>;
 	registerWEmail: (email: string, password: string) => Promise<any>;
+	loginWEmailandPassword: (email: string, password: string) => Promise<any>;
 }
 
 export const APIHandler: IAPIHandler = {
@@ -66,6 +67,14 @@ export const APIHandler: IAPIHandler = {
 			return res;
 		} catch (error) {
 			return false;
+		}
+	},
+	loginWEmailandPassword: async (email, password) => {
+		try {
+			const res = await signInWithEmailAndPassword(auth, email, password);
+			console.log({ res });
+		} catch (error) {
+			alert("User not found");
 		}
 	},
 	loginWDemo: async () => {

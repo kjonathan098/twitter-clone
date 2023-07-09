@@ -29,10 +29,6 @@ function App() {
 		setIsLoggedIn(true);
 	};
 
-	const addNewUser = async () => {
-		// const userExist: IUserDetails | null = await APIHandler.getUserByUID(user.uid);
-	};
-
 	useEffect(() => {
 		const unsubscribe = auth.onAuthStateChanged((user) => {
 			setLoading(true);

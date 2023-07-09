@@ -1,16 +1,13 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./Profile.css";
 import { MdCalendarMonth } from "react-icons/md";
 import { authContext } from "../../context/AuthContext";
 import TweetCard from "../Home/TweetCard";
 import defaultWallpaper from "../../media/default_wallpaper.jpg";
 import EditProfile from "./EditProfile";
-import { APIHandler } from "../../fireBaseConfig";
 import { profileContext } from "../../context/ProfileContext";
 import { ITweet } from "../../global/interfaces";
 import defaultPic from "../../media/fake_logo.png";
-import NavBar from "../NavBar/NavBar";
-import SideMenu from "../SideMenu/SideMenu";
 import MobileNavBar from "../NavBar/MobileNavBar";
 
 const Profile = () => {
@@ -22,7 +19,6 @@ const Profile = () => {
 	const { currentUser, currentUserLikes } = useContext(authContext);
 	const { userProfileInfo, fetchNewUser, userTweets, loading, getUserLikes, setuserProfileInfo } = useContext(profileContext);
 
-	// issue 1 we need to setuserProfileInfo when component unMounts
 	useEffect(() => {
 		if (!userProfileInfo) return fetchNewUser(currentUser);
 	}, [userProfileInfo, currentUser]);
@@ -123,31 +119,25 @@ const Profile = () => {
 								</>
 							)}
 
-							{
-								screenView === 2 && (
-									<>
-										{fecthingTweets ? (
-											<>loading</>
-										) : (
-											<>
-												{currentUserLikes.length ? (
-													<>
-														{currentUserLikes.map((tweet: ITweet) => {
-															return <TweetCard tweet={tweet} loading={false} currentUser={currentUser} />;
-														})}
-													</>
-												) : (
-													<>no liked tweets</>
-												)}
-											</>
-										)}
-									</>
-								)
-
-								// likedTweets?.map((tweet: ITweet) => {
-								// 	return <TweetCard tweet={tweet} loading={false} currentUser={currentUser} />;
-								// })
-							}
+							{screenView === 2 && (
+								<>
+									{fecthingTweets ? (
+										<>loading</>
+									) : (
+										<>
+											{currentUserLikes.length ? (
+												<>
+													{currentUserLikes.map((tweet: ITweet) => {
+														return <TweetCard tweet={tweet} loading={false} currentUser={currentUser} />;
+													})}
+												</>
+											) : (
+												<>no liked tweets</>
+											)}
+										</>
+									)}
+								</>
+							)}
 						</section>
 					</div>
 				</div>

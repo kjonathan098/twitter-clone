@@ -8,9 +8,8 @@ function useNewTweet() {
 		let imageURL = null;
 		if (media) {
 			// upload media and get url
-			console.log(media.name);
+
 			imageURL = await APIHandler.uploadMedia(user, media, "tweetCard");
-			console.log(imageURL, "imageurl");
 		}
 		const newTweet = {
 			tweet,
@@ -18,6 +17,7 @@ function useNewTweet() {
 			likes: [],
 			comments: [],
 			media: imageURL,
+			exactDate: new Date(),
 			dateCreated: `${day}, ${month}`,
 		};
 		return newTweet;

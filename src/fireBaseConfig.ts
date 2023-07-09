@@ -63,7 +63,6 @@ export const APIHandler: IAPIHandler = {
 	registerWEmail: async (email, password) => {
 		try {
 			const res = await createUserWithEmailAndPassword(auth, email, password);
-
 			return res;
 		} catch (error) {
 			return false;
@@ -71,8 +70,7 @@ export const APIHandler: IAPIHandler = {
 	},
 	loginWEmailandPassword: async (email, password) => {
 		try {
-			const res = await signInWithEmailAndPassword(auth, email, password);
-			console.log({ res });
+			await signInWithEmailAndPassword(auth, email, password);
 		} catch (error) {
 			alert("User not found");
 		}
@@ -156,7 +154,7 @@ export const APIHandler: IAPIHandler = {
 
 	// listen to live tweets udpates
 	liveTweets: async (setTweets) => {
-		const q = query(tweetsCollection, orderBy("dateCreated", "desc"));
+		const q = query(tweetsCollection, orderBy("exactDate", "desc"));
 		onSnapshot(q, (doc) => {
 			const tweetList: ITweet[] = [];
 			doc.forEach((doc) => {

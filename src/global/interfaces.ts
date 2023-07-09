@@ -6,6 +6,7 @@ export interface ITweet {
 	tweet: string;
 	uid: string;
 	docId?: string;
+	readonly exactDate: Date;
 }
 
 export interface IUserDetails {

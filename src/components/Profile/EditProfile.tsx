@@ -38,6 +38,8 @@ const EditProfile = ({ editProfile, setEditProfile }: IProps) => {
 	}
 	async function handleEditUpdate() {
 		if (!currentUser) return;
+		if (currentUser.email === process.env.REACT_APP_DEMO_EMAIL) return alert("demo account not allowed to update user");
+
 		if (editName === currentUser.name && !wallPaperFile && !profilePicFile) return alert("no changes detected");
 
 		const newUserObject: IEditProfile = {

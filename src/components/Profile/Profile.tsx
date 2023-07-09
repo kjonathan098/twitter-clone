@@ -30,7 +30,7 @@ const Profile = () => {
 	const fetchUserLikes = async () => {
 		setFecthingTweets(true);
 		const userLikes: ITweet[] | undefined = await getUserLikes();
-		if (!userLikes) return;
+		if (!userLikes) return setFecthingTweets(false);
 		setLikeTweets(userLikes);
 		setFecthingTweets(false);
 		return;
@@ -111,10 +111,17 @@ const Profile = () => {
 						</section>
 
 						<section id="profile_suggestions">
-							{screenView === 1 &&
-								userTweets?.map((tweet) => {
-									return <TweetCard tweet={tweet} loading={false} currentUser={currentUser} />;
-								})}
+							{screenView === 1 && (
+								<>
+									{userTweets.length ? (
+										userTweets?.map((tweet) => {
+											return <TweetCard tweet={tweet} loading={false} currentUser={currentUser} />;
+										})
+									) : (
+										<>No tweets</>
+									)}
+								</>
+							)}
 
 							{
 								screenView === 2 && (
@@ -130,7 +137,7 @@ const Profile = () => {
 														})}
 													</>
 												) : (
-													<>no tweets</>
+													<>no liked tweets</>
 												)}
 											</>
 										)}

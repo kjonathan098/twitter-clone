@@ -1,31 +1,33 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import { APIHandler, auth } from "./fireBaseConfig";
 import Home from "./components/Home/Home";
-import AuthProvider, { authContext } from "./context/AuthContext";
+import { authContext } from "./context/AuthContext";
 import Profile from "./components/Profile/Profile";
 import ProfileProvider from "./context/ProfileContext";
 import Auth from "./components/Auth/Auth";
 import NavBar from "./components/NavBar/NavBar";
 import SideMenu from "./components/SideMenu/SideMenu";
 import Trending from "./components/Trending/Trending";
-import { GiHamburgerMenu } from "react-icons/gi";
-import { AiOutlineClose } from "react-icons/ai";
 import DisplayNavProvider from "./context/DisplayNavContext";
 import { ITweet, IUserDetails } from "./global/interfaces";
 
 function App() {
 	const [loading, setLoading] = useState(true);
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
-	const [displayNav, setDisplayNav] = useState(false);
 	const [currentUser, setCurrentUser] = useState<IUserDetails | null>(null);
 	const [currentUserLikes, setcurrentUserLikes] = useState<ITweet[]>([]);
 	const test = "test";
 
+	const fetchUserTweetLikes = async (uid: string) => {
+		const tweets: ITweet[] = await APIHandler.getUserLikes(uid);
+		setcurrentUserLikes(tweets);
+	};
 	const fetchCurrentUser = async (user: any) => {
 		const userExist: IUserDetails | null = await APIHandler.getUserByUID(user.uid);
 		setCurrentUser(userExist);
+		fetchUserTweetLikes(user.uid);
 		setIsLoggedIn(true);
 	};
 
@@ -55,7 +57,7 @@ function App() {
 							<div id="max_width_container">
 								<div className="main_master">
 									{/* TODO : MAKE SURE HAMBURGER MENU STAY AT TOP AND SCROLL DOWN */}
-									<NavBar displayNav={displayNav} />
+									<NavBar />
 									<Routes>
 										<Route path="/" element={<Home />} />
 										<Route path="/profile" element={<Profile />} />

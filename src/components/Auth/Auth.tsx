@@ -1,17 +1,12 @@
 import "./Auth.css";
 import loginPic from "../../media/login_pic.jpg";
-// import { APIHandler } from "../../firebaseConfig";
 import Login from "./Login";
-// import Register from "./Register";
 import { useState } from "react";
 import Register from "./Register";
-import { APIHandler } from "../../fireBaseConfig";
 
 const Auth = () => {
 	const [register, setRegister] = useState(false);
-	function loginWDemo() {
-		APIHandler.loginWDemo()
-	}
+
 	return (
 		<div id="login_master">
 			<section>

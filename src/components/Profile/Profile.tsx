@@ -14,10 +14,9 @@ const Profile = () => {
 	const [screenView, setScreenView] = useState(1);
 	const [editProfile, setEditProfile] = useState(false);
 	const [likedTweets, setLikeTweets] = useState<ITweet[]>([]);
-	const [loadingProfile, setLoadingProfile] = useState(false);
 	const [fecthingTweets, setFecthingTweets] = useState(false);
 	const { currentUser, currentUserLikes } = useContext(authContext);
-	const { userProfileInfo, fetchNewUser, userTweets, loading, getUserLikes, setuserProfileInfo } = useContext(profileContext);
+	const { userProfileInfo, fetchNewUser, userTweets, loading, getUserLikes } = useContext(profileContext);
 
 	useEffect(() => {
 		if (!userProfileInfo) return fetchNewUser(currentUser);
@@ -31,8 +30,6 @@ const Profile = () => {
 		setFecthingTweets(false);
 		return;
 	};
-
-	//TODO: FIX USERPROFILENAME
 
 	if (loading || !currentUser || !userProfileInfo) return <>Loading</>;
 	return (
@@ -111,7 +108,7 @@ const Profile = () => {
 								<>
 									{userTweets.length ? (
 										userTweets?.map((tweet) => {
-											return <TweetCard tweet={tweet} loading={false} currentUser={currentUser} />;
+											return <TweetCard tweet={tweet} loading={false} currentUser={currentUser} key={tweet.docId} />;
 										})
 									) : (
 										<>No tweets</>

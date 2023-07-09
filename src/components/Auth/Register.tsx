@@ -1,8 +1,7 @@
-import { authContext } from "../../context/AuthContext";
 import { APIHandler } from "../../fireBaseConfig";
 import { IUserDetails } from "../../global/interfaces";
 import "./Register.css";
-import { SetStateAction, Dispatch, useState, useContext } from "react";
+import { SetStateAction, Dispatch, useState } from "react";
 
 interface IProps {
 	setRegister: Dispatch<SetStateAction<boolean>>;

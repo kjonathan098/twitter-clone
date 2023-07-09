@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./Trending.css";
 import TweetCard from "../Home/TweetCard";
 import { useLocation } from "react-router-dom";
@@ -14,9 +14,6 @@ const Trending = () => {
 	useEffect(() => {
 		setLoading(true);
 		getTrendTweets(location.state.trend);
-		console.log(location.state.trend);
-
-		// addTrend(location.state.trend);
 	}, [location.state.trend]);
 
 	async function getTrendTweets(trendTopic: any) {
@@ -24,8 +21,6 @@ const Trending = () => {
 		setTrendTweets(trendTweets);
 		console.log(trendTweets);
 		setLoading(false);
-
-		// console.log(trendTopic, "trendTopic");
 	}
 	if (loading)
 		return (

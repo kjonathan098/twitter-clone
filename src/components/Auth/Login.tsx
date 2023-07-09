@@ -1,5 +1,4 @@
 import { SetStateAction, Dispatch, useState } from "react";
-import useForm from "../../customHooks/useForm";
 import { APIHandler } from "../../fireBaseConfig";
 interface IProps {
 	setRegister: Dispatch<SetStateAction<boolean>>;
@@ -10,7 +9,7 @@ const Login = ({ setRegister }: IProps) => {
 
 	async function handleLogin() {
 		if (!userName || !password) return alert("Please enter email and password");
-		const res = await APIHandler.loginWEmailandPassword(userName, password);
+		await APIHandler.loginWEmailandPassword(userName, password);
 	}
 
 	return (

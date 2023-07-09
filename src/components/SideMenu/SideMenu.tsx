@@ -1,7 +1,5 @@
-import React from "react";
 import "./SideMenu.css";
-import { APIHandler } from "../../fireBaseConfig";
-import Trending from "../Trending/Trending";
+
 import { trendingTopics } from "../Utils/Constants/trendingTopics";
 import { useNavigate } from "react-router-dom";
 

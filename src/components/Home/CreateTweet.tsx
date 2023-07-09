@@ -25,7 +25,7 @@ const CreateTweet = () => {
 	async function uploadNewTweet(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
 		const newTweet: ITweet = await createNewTweet(tweet, currentUser, uploadMedia);
-		const res = await APIHandler.createNewTweet(newTweet);
+		await APIHandler.createNewTweet(newTweet);
 	}
 
 	function handleTweetCounter() {

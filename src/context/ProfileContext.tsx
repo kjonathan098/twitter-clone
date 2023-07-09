@@ -1,5 +1,5 @@
-import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
-import { APIHandler, auth } from "../fireBaseConfig";
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { APIHandler } from "../fireBaseConfig";
 import { ITweet, IUserDetails } from "../global/interfaces";
 import { authContext } from "./AuthContext";
 

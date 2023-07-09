@@ -1,7 +1,4 @@
 import "./ProfilePic.css";
-import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { profileContext } from "../../context/ProfileContext";
 
 interface IProps {
 	profilePic: string;
@@ -14,6 +11,7 @@ const ProfilePic = ({ profilePic, size, openUserProfile }: IProps) => {
 
 	return (
 		<img
+			alt="Profile Pic"
 			id="profilePic"
 			src={profilePic}
 			style={styles}

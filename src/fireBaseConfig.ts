@@ -41,7 +41,7 @@ interface IAPIHandler {
 	likeTweet: (docId: string, uid: string) => Promise<any>;
 	unLikeTweet: (docId: string, uid: string) => Promise<any>;
 	getUserTweet: (uid: string) => Promise<ITweet[]>;
-	getUserLikes: (uid: string) => Promise<ITweet[] | undefined>;
+	getUserLikes: (uid: string) => Promise<ITweet[]>;
 	createNewTweet: (tweet: ITweet) => Promise<any>;
 	uploadMedia: (userId: string, imageFile: File, mediaType: string) => Promise<string>;
 	uploadProfilePic: (userId: string, imageFile: File) => Promise<string>;
@@ -186,7 +186,7 @@ export const APIHandler: IAPIHandler = {
 		const q = query(tweetsCollection, where("likes", "array-contains", uid));
 		const data = await getDocs(q);
 		const tweets = data.docs;
-		if (!tweets.length) return undefined;
+		if (!tweets.length) return [];
 
 		const likedTweets: ITweet[] = [];
 		tweets.forEach((tweet) => {

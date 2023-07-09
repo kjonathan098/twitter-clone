@@ -12,12 +12,8 @@ import { APIHandler } from "../../fireBaseConfig";
 import { useContext } from "react";
 import { displayNavContext } from "../../context/DisplayNavContext";
 
-interface IProps {
-	displayNav: boolean;
-}
-
-const NavBar = ({}: IProps) => {
-	const { test, displayNav, setDisplayNav } = useContext(displayNavContext);
+const NavBar = () => {
+	const { displayNav, setDisplayNav } = useContext(displayNavContext);
 
 	return (
 		<nav className={displayNav ? `display ${displayNav ? "active" : ""}` : ""}>
@@ -34,7 +30,7 @@ const NavBar = ({}: IProps) => {
 				<div className="nav_container">
 					<div className="nav_container_top">
 						<div className="nav_top_logo">
-							<img src={logo}></img>
+							<img src={logo} alt="Logo"></img>
 						</div>
 						<div className="nav_menu">
 							<Link to="/" className="menu_link">

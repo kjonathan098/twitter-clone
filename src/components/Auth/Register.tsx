@@ -18,15 +18,17 @@ const Register = ({ setRegister }: IProps) => {
 		if (password !== rePassword) return alert("passwords mismatch");
 		const res = await APIHandler.registerWEmail(email, password);
 		if (!res) return;
+
 		const userObj: IUserDetails = {
-			uid: res.uid,
+			uid: res.user.uid,
 			joinedDate: res.user.metadata.creationTime,
 			name: userName,
 			email: email,
-			profilePic: res.photoURL,
+			profilePic: res.user.photoURL,
 			wallpaperPic: null,
 		};
-		//TODO FIX ISSUE
+
+		await APIHandler.addNewUserToDb(userObj);
 	}
 
 	return (

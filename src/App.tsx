@@ -21,13 +21,16 @@ function App() {
 	const [displayNav, setDisplayNav] = useState(false);
 	const [currentUser, setCurrentUser] = useState<IUserDetails | null>(null);
 	const [currentUserLikes, setcurrentUserLikes] = useState<ITweet[]>([]);
-
 	const test = "test";
 
 	const fetchCurrentUser = async (user: any) => {
 		const userExist: IUserDetails | null = await APIHandler.getUserByUID(user.uid);
 		setCurrentUser(userExist);
 		setIsLoggedIn(true);
+	};
+
+	const addNewUser = async () => {
+		// const userExist: IUserDetails | null = await APIHandler.getUserByUID(user.uid);
 	};
 
 	useEffect(() => {

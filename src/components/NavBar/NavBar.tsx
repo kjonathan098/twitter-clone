@@ -17,7 +17,6 @@ const NavBar = () => {
 
 	return (
 		<nav className={displayNav ? `display ${displayNav ? "active" : ""}` : ""}>
-			{/* TODO : ADD A CLOSE ICON FOR MOBILE FRIENDLY, ADD TRANSITION*/}
 			<div className="navBar_master">
 				<div className="close_btn_container">
 					<AiOutlineClose
@@ -30,7 +29,9 @@ const NavBar = () => {
 				<div className="nav_container">
 					<div className="nav_container_top">
 						<div className="nav_top_logo">
-							<img src={logo} alt="Logo"></img>
+							<Link to="/">
+								<img src={logo} alt="Logo"></img>
+							</Link>
 						</div>
 						<div className="nav_menu">
 							<Link to="/" className="menu_link">

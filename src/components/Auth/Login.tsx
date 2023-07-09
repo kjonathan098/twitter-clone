@@ -47,7 +47,14 @@ const Login = ({ setRegister }: IProps) => {
 			>
 				Or Sign-in with Google
 			</button>
-			<button className="login_demo_btn authBtn">Click here to use our Demo account</button>
+			<button
+				className="login_demo_btn authBtn"
+				onClick={() => {
+					APIHandler.loginWDemo();
+				}}
+			>
+				Click here to use our Demo account
+			</button>
 			<div>
 				Dont have an account?{" "}
 				<span

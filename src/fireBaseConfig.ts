@@ -80,7 +80,11 @@ export const APIHandler: IAPIHandler = {
 	loginWDemo: async () => {
 		const email = process.env.REACT_APP_DEMO_EMAIL;
 		const password = process.env.REACT_APP_DEMO_PASS;
-		await signInWithEmailAndPassword(auth, email!, password!);
+		try {
+			await signInWithEmailAndPassword(auth, email!, password!);
+		} catch (error) {
+			alert(`sorry we're having some issues with Demo Account`);
+		}
 	},
 
 	logout: async () => {

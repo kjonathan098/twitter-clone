@@ -25,8 +25,10 @@ const CreateTweet = () => {
 	async function uploadNewTweet(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
 		const newTweet: ITweet = await createNewTweet(tweet, currentUser, uploadMedia);
-
 		await APIHandler.createNewTweet(newTweet);
+		setTweet("");
+		setUploadMedia(null);
+		setMediaPreview(null);
 	}
 
 	function handleTweetCounter() {
@@ -50,7 +52,7 @@ const CreateTweet = () => {
 			<div>{currentUser && <ProfilePic profilePic={currentUser.profilePic || profileDefault} size={80} />}</div>
 			<div className="tweet_form-container">
 				<form onSubmit={uploadNewTweet}>
-					<textarea name="" id="tweet_form" placeholder="What's Happening?!" onChange={handleTweetInput}></textarea>
+					<textarea name="" id="tweet_form" placeholder="What's Happening?!" onChange={handleTweetInput} value={tweet}></textarea>
 					{mediaPreview && (
 						<div className="img_container">
 							<AiFillCloseCircle
